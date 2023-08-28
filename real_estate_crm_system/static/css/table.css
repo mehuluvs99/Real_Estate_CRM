@@ -1,0 +1,27 @@
+.tabulator-table {
+  max-width: auto;
+  margin: auto;
+  background-color: #040089;
+  color: black;
+  border-radius: 10px;
+}
+
+#tabulator-container.custom-tabulator{
+    font-size:12px;
+}
+
+.tabulator-table .tabulator-header {
+    background-color: #333;
+    color: black;
+}
+.tabulator-table .tabulator-header .tabulator-col {
+    white-space: normal; /* Or use 'wrap' if needed */
+}
+
+.container-fluid {
+  max-width: auto;
+  margin: auto;
+  background-color: #040089;
+  color: white;
+  border-radius: 15px;
+}

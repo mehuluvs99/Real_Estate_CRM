@@ -1,0 +1,50 @@
+/* Set a max-width for the container to center the form */
+
+.container-fluid {
+  max-width: auto;
+  margin: auto;
+  background-color: #040089;
+  color: white;
+  border-radius: 15px;
+}
+
+
+
+/* Add spacing between form groups */
+.form-group {
+  margin-bottom: 10px;
+}
+
+/* Style input fields */
+.form-control {
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 15px;
+}
+
+
+/* Style submit button */
+.btn-primary {
+  padding: 5px 5px;
+  font-size: 15px;
+  cursor: pointer;
+  color: white;
+  background-color: blue;
+}
+
+/* Style labels */
+label {
+  font-weight: ;
+}
+
+/* Style textarea */
+textarea.form-control {
+  resize: vertical;
+}
+
+form-group {
+  display: flex;
+  align-items: baseline;
+}
+

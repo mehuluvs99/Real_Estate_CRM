@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<head>
+  <title>User List</title>
+  <link rel="stylesheet" href="{% static 'css/user_list.css' %}">
+</head>
+
+<body>
+  <h3>User List</h3>
+  <div class="table-dark">
+    <div class="card body">
+      <div class="table-responsive table-scroll" data-mdb-perfect-scrollbar="true"
+        style="position: relative; height: 85vh;">
+        <table class="table table-hover">
+          <thead class="table-dark">
+            <tr>
+              <th scope="col">First Name</th>
+              <th scope="col">Last Name</th>
+              <th scope="col">User Name</th>
+              <th scope="col">Project Name</th>
+              <th scope="col">Fields</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% if users %}
+            {% for user in users %}
+            <tr>
+              <td>{{ user.first_name }}</td>
+              <td>{{ user.last_name }}</td>
+              <td>{{ user.username }}</td>
+              <td>{{ user.project_name }}</td>
+              <td>{{ user.fields }}</td>
+            </tr>
+            {% endfor %}
+            {% endif %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</body>
+{% endblock %}
