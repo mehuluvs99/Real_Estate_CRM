@@ -85,7 +85,19 @@ DATABASES = {
     }
 }
 
-
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'sql_server.pyodbc',
+#         'NAME': 'your_database_name',
+#         'USER': 'your_username',
+#         'PASSWORD': 'your_password',
+#         'HOST': 'your_host',  # e.g., 'localhost' or 'your_server_address'
+#         'PORT': 'your_port',  # e.g., '1433'
+#         'OPTIONS': {
+#             'driver': 'ODBC Driver 17 for SQL Server',  # Adjust the driver version as needed
+#         },
+#     }
+# }
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
 

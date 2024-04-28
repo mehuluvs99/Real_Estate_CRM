@@ -3,14 +3,24 @@
 {% block content %}
 <head>
     <link href="https://unpkg.com/tabulator-tables/dist/css/tabulator_materialize.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="{% static 'css/form.css' %}">
-    <link rel="stylesheet" href="{% static 'css/table.css' %}">
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+    <link rel="stylesheet" href="{% static 'css/home_table.css' %}">
 
 </head>
 <script type="text/javascript" src="https://unpkg.com/tabulator-tables/dist/js/tabulator.min.js"></script>
 
 <div class="tabulator-table">
     {% if user.is_authenticated %}
+     <div id="search-bar">
+        <label for="name-input">Name</label>
+        <input type="text" id="name-input" placeholder="Search...">
+        <label for="inquiry_type-input">Inquiry Type</label>
+        <input type="text" id="inquiry_type-input" placeholder="Search...">
+        <label for="inquiry_stage-input">Inquiry Stage</label>
+        <input type="text" id="inquiry_stage-input" placeholder="Search...">
+        <label for="assign_to-input">Assign To</label>
+        <input type="text" id="assign_to-input" placeholder="Search...">
+    </div>
     <div id="tabulator-container" class="custom-tabulator">
         <script>
             var tableData = [
@@ -79,6 +89,36 @@
                     {title:"Fields",field:"fields",width:150},
                 ],
             });
+            var nameInput = document.getElementById('name-input');
+                var inquiryTypeInput = document.getElementById('inquiry_type-input');
+                var inquiryStageInput = document.getElementById('inquiry_stage-input');
+                var assignToInput = document.getElementById('assign_to-input');
+
+                // Function to filter the table data based on the search inputs
+                function filterTable() {
+                  var nameValue = nameInput.value.toLowerCase();
+                  var inquiryTypeValue = inquiryTypeInput.value.toLowerCase();
+                  var inquiryStageValue = inquiryStageInput.value.toLowerCase();
+                  var assignToValue = assignToInput.value.toLowerCase();
+
+                  table.setFilter(function(data) {
+                    return (
+                      // Check if each field contains the corresponding search value
+                      (data.first_name && data.first_name.toLowerCase().includes(nameValue)) ||
+                      (data.middle_name && data.middle_name.toLowerCase().includes(nameValue)) ||
+                      (data.last_name && data.last_name.toLowerCase().includes(nameValue)) ||
+                      (data.inquiry_type && data.inquiry_type.toLowerCase().includes(inquiryTypeValue)) ||
+                      (data.inquiry_stage && data.inquiry_stage.toLowerCase().includes(inquiryStageValue)) ||
+                      (data.assign_to && data.assign_to.toLowerCase().includes(assignToValue))
+                    );
+                  });
+                }
+
+                // Attach event listeners to the search inputs to trigger filtering
+                nameInput.addEventListener('input', filterTable);
+                inquiryTypeInput.addEventListener('input', filterTable);
+                inquiryStageInput.addEventListener('input', filterTable);
+                assignToInput.addEventListener('input', filterTable);
         </script>
     </div>
     {% else %}
