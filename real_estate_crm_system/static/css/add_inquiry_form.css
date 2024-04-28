@@ -1,0 +1,102 @@
+/* form.css */
+
+/* Style the container */
+.add_inquiry-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+}
+
+/* Style form headings */
+.add_inquiry-container h3 {
+  text-align: center;
+  margin-top: 50px;
+  margin-bottom: 10px;
+}
+
+/* Style form labels */
+.add_inquiry-container label {
+  font-weight: bold;
+}
+
+/* Style form inputs */
+.add_inquiry-container input[type="text"],
+.add_inquiry-container input[type="email"],
+.add_inquiry-container textarea,
+.add_inquiry-container select {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box; /* Ensure padding and border are included in width */
+}
+
+/* Style form submit button */
+.add_inquiry-container button[type="submit"] {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.add_inquiry-container button[type="submit"]:hover {
+  background-color: #0056b3;
+}
+
+
+/* form.css */
+
+/* Style the container */
+.account-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+}
+
+/* Style form headings */
+.account-container h3 {
+  text-align: center;
+  margin-top: 50px;
+  margin-bottom: 10px;
+}
+
+/* Style form labels */
+.account-container label {
+  font-weight: bold;
+}
+
+/* Style form inputs */
+.account-container input[type="text"],
+.account-container input[type="email"],
+.account-container textarea,
+.account-container select {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box; /* Ensure padding and border are included in width */
+}
+
+/* Style form submit button */
+.account-container button[type="submit"] {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.account-container button[type="submit"]:hover {
+  background-color: #0056b3;
+}
