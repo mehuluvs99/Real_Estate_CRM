@@ -1,5 +1,7 @@
 import csv
 import pandas as pd
+import openpyxl
+from datetime import datetime
 from django.shortcuts import render, redirect, get_object_or_404
 from .forms import SignUpForm, AddInquiryForm, AccountsForm, PaymentForm, AgentForm
 from .models import Project_Name, Fields, Inquiry_Type, Inquiry_Stage, Selected_Unit, Assign_To, Payment_Terms, \
@@ -169,7 +171,6 @@ def upload_file(request):
             df = pd.read_excel(file)
 
             for index, row in df.iterrows():
-                # Handle empty values
                 for field in ['inquiry_type', 'inquiry_stage', 'interested_project', 'selected_unit', 'assign_to', 'fields']:
                     if pd.isna(row[field]):
                         row[field] = None
@@ -178,14 +179,67 @@ def upload_file(request):
                 next_follow_up_date = None
                 converted_date = None
 
+                inquiry_type_instance = None
+                inquiry_stage_instance = None
+                interested_project_instance = None
+                selected_unit_instance = None
+                assign_to_instance = None
+                fields_instance = None
+
                 if pd.notna(row['follow_up_date']):
-                    follow_up_date = row['follow_up_date'].to_pydatetime()
+                    follow_up_date_str = row['follow_up_date']
+                    # print(follow_up_date)
+                    # follow_up_date = datetime(follow_up_date_str, "%d/%m/%Y %H:%M:%S")
+                else:
+                    follow_up_date = None
 
                 if pd.notna(row['next_follow_up_date']):
-                    next_follow_up_date = row['next_follow_up_date'].to_pydatetime()
+                    next_follow_up_date_str = row['next_follow_up_date']
+                    # next_follow_up_date = datetime(next_follow_up_date_str, "%d/%m/%Y %H:%M:%S")
+                else:
+                    next_follow_up_date = None
 
                 if pd.notna(row['converted_date']):
-                    converted_date = row['converted_date'].to_pydatetime()
+                    converted_date_str = str(row['converted_date'])  # Assuming the date is stored as a string
+                    # converted_date = datetime(converted_date_str, "%d/%m/%Y %H:%M:%S")
+                else:
+                    converted_date = None
+
+                if row['inquiry_type'] is not None:
+                    try:
+                        inquiry_type_instance = Inquiry_Type.objects.get(inquiry_type=row['inquiry_type'])
+                    except Inquiry_Type.DoesNotExist:
+                        print(f"Inquiry_Type '{row['inquiry_type']}' does not exist.")
+
+                if row['inquiry_stage'] is not None:
+                    try:
+                        inquiry_stage_instance = Inquiry_Stage.objects.get(inquiry_stage=row['inquiry_stage'])
+                    except Inquiry_Stage.DoesNotExist:
+                        print(f"Inquiry_Stage '{row['inquiry_stage']}' does not exist.")
+
+                if row['interested_project'] is not None:
+                    try:
+                        interested_project_instance = Project_Name.objects.get(projectname=row['interested_project'])
+                    except Project_Name.DoesNotExist:
+                        print(f"Project_Name '{row['interested_project']}' does not exist.")
+
+                if row['selected_unit'] is not None:
+                    try:
+                        selected_unit_instance = Selected_Unit.objects.get(selected_unit=row['selected_unit'])
+                    except Selected_Unit.DoesNotExist:
+                        print(f"Selected_Unit '{row['selected_unit']}' does not exist.")
+
+                if row['assign_to'] is not None:
+                    try:
+                        assign_to_instance = Assign_To.objects.get(assign_to=row['assign_to'])
+                    except Assign_To.DoesNotExist:
+                        print(f"Assign_To '{row['assign_to']}' does not exist.")
+
+                if row['fields'] is not None:
+                    try:
+                        fields_instance = Fields.objects.get(fields=row['fields'])
+                    except Fields.DoesNotExist:
+                        print(f"Fields '{row['fields']}' does not exist.")
 
                 Add_Inquiry.objects.create(
                     created_date=row['created_date'],
@@ -200,16 +254,17 @@ def upload_file(request):
                     city=row['city'],
                     state=row['state'],
                     country=row['country'],
-                    inquiry_type=row['inquiry_type'],
-                    inquiry_stage=row['inquiry_stage'],
-                    interested_project=row['interested_project'],
-                    selected_unit=row['selected_unit'],
+                    inquiry_type=inquiry_type_instance,
+                    inquiry_stage=inquiry_stage_instance,
+                    interested_project=interested_project_instance,
+                    selected_unit=selected_unit_instance,
                     follow_up_date=follow_up_date,
                     remarks=row['remarks'],
                     next_follow_up_date=next_follow_up_date,
                     converted_date=converted_date,
-                    assign_to=row['assign_to'],
-                    fields=row['fields'],
+                    assign_to=assign_to_instance,
+                    fields=fields_instance,
                 )
+
             return redirect('home')  # Redirect to a page after successful upload
     return render(request, 'upload_inquiry.html')
