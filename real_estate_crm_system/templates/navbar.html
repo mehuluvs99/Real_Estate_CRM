@@ -5,7 +5,16 @@
 <div class="navbar">
     <a class="active" href="{% url 'home' %}">Real Estate CRM</a>
     {% if user.is_authenticated %}
-    <a class="nav-link" href="{% url 'add_inquiry' %}">Add Record</a>
+    <div class="dropdown">
+        <button class="dropbtn">Dropdown
+          <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content">
+          <a href="#">Link 1</a>
+          <a href="#">Link 2</a>
+          <a href="#">Link 3</a>
+        </div>
+    </div>
     <a class="nav-link" href="{% url 'account' %}">Account</a>
     <a class="nav-link" href="{% url 'payment' %}">Payment</a>
     <a class="nav-link" href="{% url 'agent' %}">Add Agent</a>
