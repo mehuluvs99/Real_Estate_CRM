@@ -11,6 +11,10 @@ body, html {
   z-index: 1000; /* Ensure the header is above the navbar */
 }
 
+.tabulator-row:hover {
+  background-color: #090490;
+}
+
 #search-bar {
   font-size: 12px; /* Adjust font size as needed */
   margin: 50px auto 10px auto; /* Adjust margin as needed */
@@ -35,3 +39,7 @@ body, html {
   color: white;
   border-radius: 15px;
 }
+
+
+
+

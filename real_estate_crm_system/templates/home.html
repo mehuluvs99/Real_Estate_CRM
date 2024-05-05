@@ -2,12 +2,13 @@
 {% load static %}
 {% block content %}
 <head>
-    <link href="https://unpkg.com/tabulator-tables/dist/css/tabulator_materialize.min.css" rel="stylesheet">
+    <link href="https://unpkg.com/tabulator-tables@6.2.1/dist/css/tabulator_modern.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'css/login.css' %}">
     <link rel="stylesheet" href="{% static 'css/home_table.css' %}">
 
 </head>
-<script type="text/javascript" src="https://unpkg.com/tabulator-tables/dist/js/tabulator.min.js"></script>
+<script type="text/javascript" src="https://unpkg.com/tabulator-tables@6.2.1/dist/js/tabulator.min.js"></script>
+<!-- <script type="text/javascript" src="https://unpkg.com/tabulator-tables/dist/js/tabulator.min.js"></script> -->
 
 <div class="tabulator-table">
     {% if user.is_authenticated %}
@@ -64,31 +65,60 @@
                 movableColumns:true,
                 paginationSize: 50,
                 columns: [
-                    {title:"ID",field:"id", width:100},
-                    {title:"Created Date",field:"created_date",width:150},
-                    {title:"First Name",field:"first_name",width:150},
-                    {title:"Middle Name",field:"middle_name",width:150},
+                    {title:"ID",field:"id", width:100,frozen:true},
+                    {title:"Created Date",field:"created_date",width:150,frozen:true},
+                    {title:"First Name",field:"first_name",width:150,frozen:true},
+                    {title:"Middle Name",field:"middle_name",width:120},
                     {title:"Last Name",field:"last_name",width:150},
-                    {title:"Mobile No.",field:"mobile_number",width:150},
-                    {title:"WA Mobile No.",field:"whatsapp_mobile_number",width:150},
+                    {title:"Mobile No.",field:"mobile_number",width:120},
+                    {title:"WA Mobile No.",field:"whatsapp_mobile_number",width:120},
                     {title:"Email Id",field:"email_id",width:150},
                     {title:"Address",field:"address",width:200},
-                    {title:"Area",field:"area",width:150},
-                    {title:"City",field:"city",width:150},
-                    {title:"State",field:"state",width:150},
-                    {title:"Country",field:"country",width:150},
-                    {title:"Inquiry Type",field:"inquiry_type",width:150},
-                    {title:"Inquiry Stage",field:"inquiry_stage",width:150},
+                    {title:"Area",field:"area",width:120},
+                    {title:"City",field:"city",width:120},
+                    {title:"State",field:"state",width:120},
+                    {title:"Country",field:"country",width:120},
+                    {title:"Inquiry Type",field:"inquiry_type",width:120,
+                        formatter: function(cell) {
+                            var data = cell.getRow().getData();
+                            var type = data['inquiry_type'];
+                            if (type === "Cold") {
+                                // Apply background color to the row
+                                var rowElement = cell.getRow().getElement();
+                                rowElement.style.backgroundColor = "#ff384c";
+                                rowElement.style.color = "#000000"; // White font color
+                            }
+                        }
+                    },
+                    {title:"Inquiry Stage",field:"inquiry_stage",width:120, 
+                        formatter: function(cell) {
+                            var data = cell.getRow().getData();
+                            var stage = data['inquiry_stage'];
+                            if (stage === "Converted") {
+                                // Apply background color to the row
+                                var rowElement = cell.getRow().getElement();
+                                rowElement.style.backgroundColor = "#38ff63";
+                                rowElement.style.color = "#000000"; // White font color
+                            }
+                            if (stage === "Site Visited") {
+                                // Apply background color to the row
+                                var rowElement = cell.getRow().getElement();
+                                rowElement.style.backgroundColor = "#ffed47";
+                                rowElement.style.color = "#000000"; // White font color
+                            }
+                        }
+                    },
                     {title:"Interested Project",field:"interested_project",width:150},
-                    {title:"Selected Unit",field:"selected_unit",width:100},
+                    {title:"Selected Unit",field:"selected_unit",width:120},
                     {title:"Follow Up Date",field:"follow_up_date",width:150},
                     {title:"Remarks",field:"remarks",width:250},
                     {title:"Next Follow Up Date",field:"next_follow_up_date",width:150},
                     {title:"Converted Date",field:"converted_date",width:150},
-                    {title:"Assign To",field:"assign_to",width:150},
-                    {title:"Fields",field:"fields",width:150},
+                    {title:"Assign To",field:"assign_to",width:120},
+                    {title:"Fields",field:"fields",width:120},
                 ],
             });
+            
 
             var nameInput = document.getElementById('name-input');
             var inquiryTypeInput = document.getElementById('inquiry_type-input');
@@ -107,7 +137,6 @@
                 table.setFilter(function(data) {
                     // console.log("data:", data);
                     return (
-                        // Check if each field contains the corresponding search value
                         (data.first_name && data.first_name.toLowerCase().includes(nameValue)) ||
                         (data.middle_name && data.middle_name.toLowerCase().includes(nameValue)) ||
                         (data.last_name && data.last_name.toLowerCase().includes(nameValue)) ||
@@ -117,6 +146,8 @@
                         (data.interested_project && data.interested_project.toLowerCase().includes(interestedProjectValue))
                     );
                 });
+
+                table.redraw();
                 
             }
 
