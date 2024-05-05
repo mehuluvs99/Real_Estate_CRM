@@ -54,7 +54,7 @@ class AddInquiryForm(forms.ModelForm):
             'follow_up_data': forms.DateTimeInput(
                 attrs={'class': 'form-control form-control-lg', 'placeholder': 'Converted Date'},
                 format='%d-%m-%Y HH:MM:SS'),
-            'remarks': forms.Textarea(attrs={'class': 'form-control form-control-lg', 'placeholder': 'Remarks'}),
+            'remarks': forms.TextInput(attrs={'class': 'form-control form-control-lg', 'placeholder': 'Remarks'}),
             'next_follow_up_data': forms.DateTimeInput(
                 attrs={'class': 'form-control form-control-lg', 'placeholder': 'Converted Date'},
                 format='%d-%m-%Y HH:MM:SS'),
