@@ -124,7 +124,7 @@ def agent(request):
 #     if request.method == 'POST':
 #         file = request.FILES['file_upload']
 #         print("Done")
-#
+
 #         if file.name.endswith('.csv') | file.name.endswith('.xlsx'):
 #             # Process the uploaded CSV file
 #             decoded_file = file.read().decode('utf-8')
