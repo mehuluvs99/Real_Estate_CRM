@@ -4,7 +4,7 @@
 <head>
     <link href="https://unpkg.com/tabulator-tables@6.2.1/dist/css/tabulator_modern.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'css/login.css' %}">
-    <link rel="stylesheet" href="{% static 'css/home_table.css' %}">
+    <link rel="stylesheet" href="{% static 'css/agent_table.css' %}">
 
 </head>
 <script type="text/javascript" src="https://unpkg.com/tabulator-tables@6.2.1/dist/js/tabulator.min.js"></script>
@@ -12,6 +12,18 @@
 
 <div class="tabulator-table">
     {% if user.is_authenticated %}
+    <div id="search-bar">
+        <label for="name-input">Name</label>
+        <input type="text" id="name-input" placeholder="Search...">
+        <label for="inquiry_type-input">Inquiry Type</label>
+        <input type="text" id="inquiry_type-input" placeholder="Search...">
+        <label for="inquiry_stage-input">Inquiry Stage</label>
+        <input type="text" id="inquiry_stage-input" placeholder="Search...">
+        <label for="assign_to-input">Assign To</label>
+        <input type="text" id="assign_to-input" placeholder="Search...">
+        <label for="interested_project-input">Interested Project</label>
+        <input type="text" id="interested_project-input" placeholder="Search...">
+    </div>
     <div id="tabulator-container" class="custom-tabulator">
         <script>
             var agenttableData = [

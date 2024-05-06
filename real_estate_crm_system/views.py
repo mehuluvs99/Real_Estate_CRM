@@ -155,7 +155,7 @@ def agent_data(request):
             messages.success(request, "There was an Error, Please try again")
             return redirect('home')
     else:
-        return render(request, 'home.html', {'agent_records': agent_records})
+        return render(request, 'agent_data.html', {'agent_records': agent_records})
 
 
 # def upload_file(request):
