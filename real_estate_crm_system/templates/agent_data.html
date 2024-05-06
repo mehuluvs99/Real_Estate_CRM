@@ -12,21 +12,9 @@
 
 <div class="tabulator-table">
     {% if user.is_authenticated %}
-    <!-- <div id="search-bar">
-        <label for="name-input">Name</label>
-        <input type="text" id="name-input" placeholder="Search...">
-        <label for="inquiry_type-input">Inquiry Type</label>
-        <input type="text" id="inquiry_type-input" placeholder="Search...">
-        <label for="inquiry_stage-input">Inquiry Stage</label>
-        <input type="text" id="inquiry_stage-input" placeholder="Search...">
-        <label for="assign_to-input">Assign To</label>
-        <input type="text" id="assign_to-input" placeholder="Search...">
-        <label for="interested_project-input">Interested Project</label>
-        <input type="text" id="interested_project-input" placeholder="Search...">
-    </div> -->
     <div id="tabulator-container" class="custom-tabulator">
         <script>
-            var tableData = [
+            var agenttableData = [
                 {% for agent in agent_records %}
                     {
                         id:"{{agent.id}}",
@@ -42,7 +30,7 @@
             ];
 
             var table = new Tabulator("#tabulator-container", {
-                data: tableData,
+                data: agenttableData,
                 layout: "fitColumns",
                 pagination: "local",
                 frozenRows:0,
@@ -61,43 +49,6 @@
                 ],
             });
             
-
-            // var nameInput = document.getElementById('name-input');
-            // var inquiryTypeInput = document.getElementById('inquiry_type-input');
-            // var inquiryStageInput = document.getElementById('inquiry_stage-input');
-            // var assignToInput = document.getElementById('assign_to-input');
-            // var interestedProjectInput = document.getElementById('interested_project-input');
-
-            // function filterTable() {
-            //     console.log("Filtering...");
-            //     var nameValue = nameInput.value.toLowerCase();
-            //     var inquiryTypeValue = inquiryTypeInput.value.toLowerCase();
-            //     var inquiryStageValue = inquiryStageInput.value.toLowerCase();
-            //     var assignToValue = assignToInput.value.toLowerCase();
-            //     var interestedProjectValue = interestedProjectInput.value.toLowerCase();
-
-            //     table.setFilter(function(data) {
-            //         // console.log("data:", data);
-            //         return (
-            //             (data.first_name && data.first_name.toLowerCase().includes(nameValue)) ||
-            //             (data.middle_name && data.middle_name.toLowerCase().includes(nameValue)) ||
-            //             (data.last_name && data.last_name.toLowerCase().includes(nameValue)) ||
-            //             (data.inquiry_type && data.inquiry_type.toLowerCase().includes(inquiryTypeValue)) ||
-            //             (data.inquiry_stage && data.inquiry_stage.toLowerCase().includes(inquiryStageValue)) ||
-            //             (data.assign_to && data.assign_to.toLowerCase().includes(assignToValue)) ||
-            //             (data.interested_project && data.interested_project.toLowerCase().includes(interestedProjectValue))
-            //         );
-            //     });
-
-            //     table.redraw();
-                
-            // }
-
-            // nameInput.addEventListener('input', filterTable);
-            // inquiryTypeInput.addEventListener('input', filterTable);
-            // inquiryStageInput.addEventListener('input', filterTable);
-            // assignToInput.addEventListener('input', filterTable);
-            // interestedProjectInput.addEventListener('input', filterTable);
 
         </script>
     </div>
