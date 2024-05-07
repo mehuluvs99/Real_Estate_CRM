@@ -7,14 +7,14 @@
     {% if user.is_authenticated %}
     <a class="nav-link" href="{% url 'add_inquiry' %}">Add Inquiry</a>
     <a class="nav-link" href="{% url 'upload_inquiry' %}">Upload Inquiry</a>
-    <!-- <a class="dropdown">
-        <a class="dropdown-content">FMS</a>
+    <div class="dropdown">
+        <a class="nav-link">FMS</a>
         <div class="dropdown-content">
-          <a class="nav-link" href="{% url 'add_inquiry' %}">Page1</a>
-          <a class="nav-link" href="{% url 'add_inquiry' %}">Page2</a>
-          <a class="nav-link" href="{% url 'add_inquiry' %}">Page3</a>
+            <a href="{% url 'account' %}">Page1</a>
+            <a href="{% url 'account' %}">Page2</a>
+            <a href="{% url 'account' %}">Page3</a>
         </div>
-    </a> -->
+    </div>
     <a class="nav-link" href="{% url 'account' %}">Account</a>
     <a class="nav-link" href="{% url 'payment' %}">Recieve Payment</a>
     <a class="nav-link" href="{% url 'upload_account' %}">Upload Payment</a>

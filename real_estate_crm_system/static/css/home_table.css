@@ -3,6 +3,7 @@ body, html {
   margin-top: 5px; /* Adjust this value based on the height of your navbar */
   padding-top: auto;
   font-family: Arial, sans-serif;
+  background-color: darkblue;
 }
 
 .tabulator-table .tabulator-header {
@@ -17,19 +18,20 @@ body, html {
 
 #search-bar {
   font-size: 12px; /* Adjust font size as needed */
-  margin: 50px auto 10px auto; /* Adjust margin as needed */
+  margin: 10px auto 10px auto; /* Adjust margin as needed */
   padding: 5px;
   max-height: calc(100vh - 40px - 90px); /* Subtract the height of the navbar and search bar from the viewport height */
   overflow-y: auto; /* Enable vertical scrolling if needed */
   background-color: #E8EAF6;
-  border-radius:20px;
+  border-radius:10px;
 }
 
 #tabulator-container.custom-tabulator {
   font-size: 10px;
   margin: 10px auto; /* Adjust this value based on the height of your navbar */
-  overflow-y: auto; /* Allow vertical scrolling */
+  overflow-y:  5px auto; /* Allow vertical scrolling */
   max-height: calc(100vh - 40px - 90px); /* Subtract the height of the navbar and search bar from the viewport height */
+  border-radius:10px;
 }
 
 .container-fluid {
@@ -37,9 +39,5 @@ body, html {
   margin: auto;
   background-color: #040089;
   color: white;
-  border-radius: 15px;
+  border-radius: 10px;
 }
-
-
-
-
