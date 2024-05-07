@@ -78,36 +78,8 @@
                     {title:"City",field:"city",width:120},
                     {title:"State",field:"state",width:120},
                     {title:"Country",field:"country",width:120},
-                    {title:"Inquiry Type",field:"inquiry_type",width:120,
-                        formatter: function(cell) {
-                            var data = cell.getRow().getData();
-                            var type = data['inquiry_type'];
-                            if (type === "Cold") {
-                                // Apply background color to the row
-                                var rowElement = cell.getRow().getElement();
-                                rowElement.style.backgroundColor = "#ff384c";
-                                rowElement.style.color = "#000000"; // White font color
-                            }
-                        }
-                    },
-                    {title:"Inquiry Stage",field:"inquiry_stage",width:120, 
-                        formatter: function(cell) {
-                            var data = cell.getRow().getData();
-                            var stage = data['inquiry_stage'];
-                            if (stage === "Converted") {
-                                // Apply background color to the row
-                                var rowElement = cell.getRow().getElement();
-                                rowElement.style.backgroundColor = "#38ff63";
-                                rowElement.style.color = "#000000"; // White font color
-                            }
-                            if (stage === "Site Visited") {
-                                // Apply background color to the row
-                                var rowElement = cell.getRow().getElement();
-                                rowElement.style.backgroundColor = "#ffed47";
-                                rowElement.style.color = "#000000"; // White font color
-                            }
-                        }
-                    },
+                    {title:"Inquiry Type",field:"inquiry_type",width:120, formatter: type},
+                    {title:"Inquiry Stage",field:"inquiry_stage",width:120, formatter:stage},
                     {title:"Interested Project",field:"interested_project",width:150},
                     {title:"Selected Unit",field:"selected_unit",width:120},
                     {title:"Follow Up Date",field:"follow_up_date",width:150},
@@ -118,8 +90,35 @@
                     {title:"Fields",field:"fields",width:120},
                 ],
             });
-            
 
+            function stage(cell) {
+                var data = cell.getRow().getData();
+                var stage = data['inquiry_stage'];
+                if (stage === "Converted") {
+                    // Apply background color to the row
+                    var rowElement = cell.getRow().getElement();
+                    rowElement.style.backgroundColor = "#38ff63";
+                    rowElement.style.color = "#000000"; // White font color
+                }
+                if (stage === "Site Visited") {
+                    // Apply background color to the row
+                    var rowElement = cell.getRow().getElement();
+                    rowElement.style.backgroundColor = "#ffed47";
+                    rowElement.style.color = "#000000"; // White font color
+                }
+            }
+
+            function type(cell){
+                var data = cell.getRow().getData();
+                var type = data['inquiry_type'];
+                if (type === "Cold") {
+                    // Apply background color to the row
+                    var rowElement = cell.getRow().getElement();
+                    rowElement.style.backgroundColor = "#ff384c";
+                    rowElement.style.color = "#000000"; // White font color
+                }
+            }
+            
             var nameInput = document.getElementById('name-input');
             var inquiryTypeInput = document.getElementById('inquiry_type-input');
             var inquiryStageInput = document.getElementById('inquiry_stage-input');

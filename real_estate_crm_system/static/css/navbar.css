@@ -89,4 +89,7 @@
 
 /* Active class for the current page */
 
+.active{
+    background-color: #4CAF50;
+}
 /* Responsive navigation */

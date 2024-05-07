@@ -2,7 +2,7 @@
 body, html {
   margin-top: 5px; /* Adjust this value based on the height of your navbar */
   padding-top: auto;
-  font-family: Arial, sans-serif;
+  font-family: calibri;
   background-color: darkblue;
 }
 
@@ -17,13 +17,14 @@ body, html {
 }
 
 #search-bar {
-  font-size: 12px; /* Adjust font size as needed */
-  margin: 10px auto 10px auto; /* Adjust margin as needed */
+  font-size: 15px; /* Adjust font size as needed */
+  margin: 40px auto 10px auto; /* Adjust margin as needed */
   padding: 5px;
   max-height: calc(100vh - 40px - 90px); /* Subtract the height of the navbar and search bar from the viewport height */
   overflow-y: auto; /* Enable vertical scrolling if needed */
   background-color: #E8EAF6;
   border-radius:10px;
+  font-family:calibri;
 }
 
 #tabulator-container.custom-tabulator {
