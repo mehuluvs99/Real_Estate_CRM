@@ -57,7 +57,7 @@
                     {title:"Mobile No.",field:"phone_number",width:120},
                     {title:"WA Mobile No.",field:"whatsapp_number",width:120},
                     {title:"Email Id",field:"email",width:150},
-                    {title:"Address",field:"address",width:200},
+                    {title:"Address",field:"address",width:250},    
                 ],
             });
             
@@ -65,21 +65,7 @@
         </script>
     </div>
     {% else %}
-    <div class="login-container">
-        <div class="login-form">
-            <h1>Login</h1>
-            <form method="POST" action="{% url 'home' %}">
-                {% csrf_token %}
-                <div class="login-input">
-                    <input type="text" class="login-input-field" name="username" placeholder="Username" required>
-                </div>
-                <div class="login-input">
-                    <input type="password" class="login-input-field" name="password" placeholder="Password" required>
-                </div>
-                <button type="submit" class="login-button">Login</button>
-            </form>
-        </div>
-    </div>
+    {% include 'login.html' %}
 
     {% endif %}
 </div>

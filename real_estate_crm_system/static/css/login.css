@@ -1,7 +1,6 @@
 /* CSS for Login Page */
 
 .login-container {
-    mar
     width: 100%;
     max-width: 400px;
     margin: 0 auto;
@@ -9,6 +8,7 @@
     background-color: #f7f7f7;
     border-radius: 5px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    font-family: calibri;
 }
 
 .login-form h1 {
@@ -27,6 +27,7 @@
     border: 1px solid #ccc;
     border-radius: 5px;
     font-size: 16px;
+    font-family: calibri;
 }
 
 .login-button {

@@ -10,6 +10,8 @@
     width: 99%; /* Occupy full width */
     top: 0; /* Position at the top */
     z-index: 1000; /* Ensure it's above other content */
+    font-size:15px;
+    font-family: calibri;
 }
 
 .navbar a {
@@ -19,6 +21,7 @@
     text-align: center;
     padding: 14px 20px;
     text-decoration: none;
+    padding: 5px 10px;
 }
 
 .navbar a:hover {
@@ -26,8 +29,8 @@
     color: black;
     border-radius: 20px;
 }
-
-.navbar a.active {
+    
+.nazvbar a.active {
     background-color: #4CAF50;
     color: white;
     border-radius: 20px;
