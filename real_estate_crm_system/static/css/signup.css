@@ -1,9 +1,14 @@
 /* CSS for Signup Page */
 
+body {
+    background-color: darkblue;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
 .signup-container {
     width: 100%;
     max-width: 600px;
-    margin: 0 auto;
+    margin: 50px auto;
     padding: 20px;
     background-color: #f7f7f7;
     border-radius: 5px;
@@ -19,6 +24,7 @@
 
 .form-group {
     margin-bottom: 20px;
+    margin-right: 20px;
 }
 
 .form-group label {
@@ -37,6 +43,64 @@
 
 .btn-primary {
     padding: 10px 20px;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+/* Label style */
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+/* Dropdown select style */
+.form-group select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    font-family: calibri;
+    appearance: none; /* Remove default arrow */
+    -webkit-appearance: none; /* Remove default arrow for Safari */
+    background-color: #fff; /* Dropdown background color */
+    cursor: pointer;
+}
+
+/* Dropdown arrow icon */
+.form-group select::-ms-expand {
+    display: none;
+}
+
+/* Hover effect on dropdown */
+.form-group select:hover {
+    border-color: #007bff; /* Change border color on hover */
+}
+
+/* Focus effect on dropdown */
+.form-group select:focus {
+    border-color: #007bff; /* Change border color on focus */
+    outline: none; /* Remove default focus outline */
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Add box shadow on focus */
+}
+
+
+.btn-primary {
+    width: 100%;
+    padding: 10px;
     background-color: #007bff;
     border: none;
     border-radius: 5px;
