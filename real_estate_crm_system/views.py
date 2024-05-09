@@ -21,12 +21,12 @@ def home(request):
         if user is not None:
             login(request, user)
             messages.success(request, "You have been logged in!")
-            return redirect("index")
+            return redirect("home")
         else:
             messages.success(request, "There was an Error, Please try again")
             return redirect('index')
     else:
-        return render(request, 'index.html', {'records': records})
+        return render(request, 'home.html', {'records': records})
 
 
 def login_user(request):
@@ -39,18 +39,18 @@ def login_user(request):
         if user is not None:
             login(request, user)
             messages.success(request, "You have been logged in!")
-            return redirect("index")
+            return redirect("home")
         else:
             messages.success(request, "There was an Error, Please try again")
-            return redirect('index')
+            return redirect('home')
     else:
-        return render(request, 'index.html', {'records': records})
+        return render(request, 'home.html', {'records': records})
 
 
 def logout_user(request):
     logout(request)
     messages.success(request, "You have been logged out")
-    return redirect('index')
+    return redirect('home')
 
 
 def signup(request):
@@ -63,7 +63,7 @@ def signup(request):
             user = authenticate(username=username, password=password)
             login(request, user)
             messages.success(request, "You have successfully signed up.")
-            return redirect('index')  # Replace 'home' with the appropriate URL name
+            return redirect('home')  # Replace 'home' with the appropriate URL name
     else:
         form = SignUpForm()
     return render(request, 'signup.html', {'form': form})
@@ -80,7 +80,7 @@ def add_inquiry(request):
         if form.is_valid():
             inquiry = form.save()
             # Do any additional processing or redirects here
-            return redirect('index')  # Replace 'home' with the appropriate URL name
+            return redirect('home')  # Replace 'home' with the appropriate URL name
     else:
         form = AddInquiryForm()
     return render(request, 'add_inquiry.html', {'form': form})
@@ -96,12 +96,12 @@ def account_data(request):
         if user is not None:
             login(request, user)
             messages.success(request, "You have been logged in!")
-            return redirect("index")
+            return redirect("home")
         else:
             messages.success(request, "There was an Error, Please try again")
-            return redirect('index')
+            return redirect('home')
     else:
-        return render(request, 'index.html', {'account_records': account_records})
+        return render(request, 'home.html', {'account_records': account_records})
 
 
 def accounts(request):
@@ -110,7 +110,7 @@ def accounts(request):
         if account.is_valid():
             account_form = account.save()
             # Do any additional processing or redirects here
-            return redirect('index')  # Replace 'home' with the appropriate URL name
+            return redirect('home')  # Replace 'home' with the appropriate URL name
     else:
         account = AccountsForm()
     return render(request, 'account.html', {'form': account})
@@ -122,7 +122,7 @@ def payment(request):
         if form.is_valid():
             payment = form.save()
             # Do any additional processing or redirects here
-            return redirect('index')  # Replace 'home' with the appropriate URL name
+            return redirect('home')  # Replace 'home' with the appropriate URL name
     else:
         form = PaymentForm()
     return render(request, 'payment.html', {'form': form})
@@ -133,7 +133,7 @@ def agent(request):
         form = AgentForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('index')  # Replace 'home' with the appropriate URL name
+            return redirect('home')  # Replace 'home' with the appropriate URL name
     else:
         form = AgentForm()
 
@@ -150,10 +150,10 @@ def agent_data(request):
         if user is not None:
             login(request, user)
             messages.success(request, "You have been logged in!")
-            return redirect("index")
+            return redirect("home")
         else:
             messages.success(request, "There was an Error, Please try again")
-            return redirect('index')
+            return redirect('home')
     else:
         return render(request, 'agent_data.html', {'agent_records': agent_records})
 
@@ -302,7 +302,7 @@ def upload_inquiry_file(request):
                     fields=fields_instance,
                 )
 
-            return redirect('index')  # Redirect to a page after successful upload
+            return redirect('home')  # Redirect to a page after successful upload
     return render(request, 'upload_inquiry.html')
 
 
@@ -411,5 +411,5 @@ def upload_account_file(request):
                     fields=fields_instance,
                 )
 
-            return redirect('index')  # Redirect to a page after successful upload
+            return redirect('home')  # Redirect to a page after successful upload
     return render(request, 'upload_account.html')
