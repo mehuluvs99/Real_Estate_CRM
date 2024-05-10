@@ -1,0 +1,29 @@
+<!-- project_list.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Project List</title>
+</head>
+<body>
+    <h1>Project List</h1>
+
+    {% if projects %}
+        <ul>
+            {% for project in projects %}
+                <li>
+                    <strong>{{ project.name }}</strong> - {{ project.description }}
+                    <!-- Link to project detail view -->
+                    <a href="{% url 'delete_project' project.id %}">View Details</a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No projects found.</p>
+    {% endif %}
+
+    <!-- Link to add new project view -->
+    <!-- <a href="{% url 'add_project' %}">Add New Project</a> -->
+</body>
+</html>

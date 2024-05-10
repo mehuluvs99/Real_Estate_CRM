@@ -1,0 +1,16 @@
+<!-- confirm_delete_project.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Confirm Project Deletion</title>
+</head>
+<body>
+    <h2>Confirm Deletion</h2>
+    <p>Are you sure you want to delete project "{{ project.name }}"?</p>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Delete</button>
+        <a href="">Cancel</a>
+    </form>
+</body>
+</html>

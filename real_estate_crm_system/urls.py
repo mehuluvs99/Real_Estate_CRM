@@ -15,5 +15,11 @@ urlpatterns = [
     path('agent/', views.agent, name='agent'),
     path('agent_data/', views.agent_data, name='agent_data'),
     path('manage/', views.ManageModelsView.as_view(), name='manage_models'),
+    path('delete_project/<int:project_id>/', views.delete_project, name='delete_project'),
+    path('project/update/<int:project_id>/', views.update_project, name='update_project'),
+
+    # path('projects/', views.project_list, name='project_list'),
+
+
 
 ]

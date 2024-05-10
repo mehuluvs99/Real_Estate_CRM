@@ -382,11 +382,6 @@ def upload_account_file(request):
     return render(request, 'upload_account.html')
 
 
-from django.shortcuts import render, redirect
-from django.views import View
-from .forms import *
-from .models import *
-
 class ManageModelsView(View):
     def get(self, request):
         # Initialize all forms
@@ -469,3 +464,37 @@ class ManageModelsView(View):
             'payment_terms_forms': Payment_Terms.objects.all(),
             'payment_type_forms': Payment_Type.objects.all(),
         })
+
+
+def delete_project(request, project_id):
+    project = get_object_or_404(Project_Name, pk=project_id)
+    
+    if request.method == 'POST':
+        # If the request is a POST (typically from a form submission), proceed with deletion
+        project.delete()
+        return redirect('manage_models')  # Redirect to a success URL after deletion
+
+    # If the request is not a POST (e.g., GET request), render a confirmation template
+    return render(request, 'confirm_delete_project.html', {'project': project})
+
+
+def project_list(request):
+    projects = Project_Name.objects.all()
+    return render(request, 'project_list.html', {'projects': projects})
+
+
+def update_project(request, project_id):
+    # Retrieve the project instance to be updated from the database
+    project = get_object_or_404(Project_Name, pk=project_id)
+
+    if request.method == 'POST':
+        # Create a form instance and populate it with the POST data and existing instance
+        form = ProjectForm(request.POST, instance=project)
+        if form.is_valid():
+            # Save the updated project object to the database
+            form.save()
+            # Redirect to a success URL (e.g., project detail page) after updating
+            return redirect('manage_models', project_id=project_id)
+    else:
+        # If it's a GET request, pre-fill the form with the existing project data
+        form = ProjectForm(instance=project)
