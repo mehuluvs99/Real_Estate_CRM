@@ -1,4 +1,3 @@
-/* Uncommented body, html styles since they were previously commented out */
 body, html {
   margin-top: 5px; /* Adjust this value based on the height of your navbar */
   padding-top: auto;
@@ -16,9 +15,21 @@ body, html {
   background-color: #090490;
 }
 
+@media (hover: hover) and (pointer: fine) {
+  .tabulator-row.tabulator-selectable:hover .tabulator-cell {
+      background-color: #2544b7;
+      color:white;
+  }
+}
+.tabulator-row .tabulator-cell {
+  border-right: 2px solid #fff;
+  padding: 6px 4px;
+  background-color:transparent;
+}
+
 #search-bar {
   font-size: 15px; /* Adjust font size as needed */
-  margin: 40px auto 10px auto; /* Adjust margin as needed */
+  margin: 50px auto 10px auto; /* Adjust margin as needed */
   padding: 5px;
   max-height: calc(100vh - 40px - 90px); /* Subtract the height of the navbar and search bar from the viewport height */
   overflow-y: auto; /* Enable vertical scrolling if needed */

@@ -3,12 +3,17 @@ import pandas as pd
 import openpyxl
 from datetime import datetime
 from django.shortcuts import render, redirect, get_object_or_404
-from .forms import SignUpForm, AddInquiryForm, AccountsForm, PaymentForm, AgentForm
+from .forms import SignUpForm, AddInquiryForm, AccountsForm, PaymentForm, AgentForm, ProjectForm, FieldForm, Inquiry_TypeForm, Inquiry_StageForm, Selected_UnitForm, Assign_ToForm, Payment_TermsForm, \
+    Payment_TypeForm
 from .models import Project_Name, Fields, Inquiry_Type, Inquiry_Stage, Selected_Unit, Assign_To, Payment_Terms, \
     Payment_Type, Add_Inquiry, Accounts, Payment, Agents
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
+from django.views import View
+from django.shortcuts import render
+import matplotlib.pyplot as plt
+import mpld3
 
 
 def home(request):
@@ -133,7 +138,7 @@ def agent(request):
         form = AgentForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('home')  # Replace 'home' with the appropriate URL name
+            return redirect('agent.html')  # Replace 'home' with the appropriate URL name
     else:
         form = AgentForm()
 
@@ -157,44 +162,6 @@ def agent_data(request):
     else:
         return render(request, 'agent_data.html', {'agent_records': agent_records})
 
-
-# def upload_file(request):
-#     if request.method == 'POST':
-#         file = request.FILES['file_upload']
-#         print("Done")
-
-#         if file.name.endswith('.csv') | file.name.endswith('.xlsx'):
-#             # Process the uploaded CSV file
-#             decoded_file = file.read().decode('utf-8')
-#             csv_data = csv.reader(decoded_file.splitlines(), delimiter=',')
-#             for row in csv_data:
-#                 # Assuming your CSV file structure matches the order of fields in the Inquiry model
-#                 Add_Inquiry.objects.create(
-#                     created_date=row[1],
-#                     first_name=row[2],
-#                     middle_name=row[3],
-#                     last_name=row[4],
-#                     mobile_number=row[5],
-#                     whatsapp_mobile_number=row[6],
-#                     email_id=row[7],
-#                     address=row[8],
-#                     area=row[9],
-#                     city=row[10],
-#                     state=row[11],
-#                     country=row[12],
-#                     inquiry_type=row[13],
-#                     inquiry_stage=row[14],
-#                     interested_project=row[15],
-#                     selected_unit=row[16],
-#                     follow_up_date=row[17],
-#                     remarks=row[18],
-#                     next_follow_up_date=row[19],
-#                     converted_date=row[20],
-#                     assign_to=row[21],
-#                     fields=row[22],
-#                 )
-#             return redirect('home')  # Redirect to a page after successful upload
-#     return render(request, 'upload_inquiry.html')  # Render the form for file upload
 
 
 def upload_inquiry_file(request):
@@ -411,5 +378,63 @@ def upload_account_file(request):
                     fields=fields_instance,
                 )
 
-            return redirect('home')  # Redirect to a page after successful upload
+            return redirect('upload_account')  # Redirect to a page after successful upload
     return render(request, 'upload_account.html')
+
+
+class ManageModelsView(View):
+    def get(self, request):
+        # Initialize all forms
+        project_form = ProjectForm()
+        field_form = FieldForm()
+        inquiry_type_form = Inquiry_TypeForm()
+        inquiry_stage_form = Inquiry_StageForm()
+        selected_unit_form = Selected_UnitForm()
+        assign_to_form = Assign_ToForm()
+        payment_terms_form = Payment_TermsForm()
+        payment_type_form = Payment_TypeForm()
+
+        # Render the form page with all form instances
+        return render(request, 'manage_models.html', {
+            'project_form': project_form,
+            'field_form': field_form,
+            'inquiry_type_form': inquiry_type_form,
+            'inquiry_stage_form': inquiry_stage_form,
+            'selected_unit_form': selected_unit_form,
+            'assign_to_form': assign_to_form,
+            'payment_terms_form': payment_terms_form,
+            'payment_type_form': payment_type_form
+        })
+
+    def post(self, request):
+        # Dictionary mapping form names to their corresponding form instances
+        form_instances = {
+            'project_form': ProjectForm,
+            'field_form': FieldForm,
+            'inquiry_type_form': Inquiry_TypeForm,
+            'inquiry_stage_form': Inquiry_StageForm,
+            'selected_unit_form': Selected_UnitForm,
+            'assign_to_form': Assign_ToForm,
+            'payment_terms_form': Payment_TermsForm,
+            'payment_type_form': Payment_TypeForm,
+        }
+
+        # Check which form was submitted
+        for form_name, form_class in form_instances.items():
+            if form_name in request.POST:
+                form = form_class(request.POST)
+                if form.is_valid():
+                    form.save()
+                    return redirect('manage_models')
+
+        # If no form was submitted or form is invalid, render the page with all forms
+        return render(request, 'manage_models.html', {
+            'project_form': ProjectForm(),
+            'field_form': FieldForm(),
+            'inquiry_type_form': Inquiry_TypeForm(),
+            'inquiry_stage_form': Inquiry_StageForm(),
+            'selected_unit_form': Selected_UnitForm(),
+            'assign_to_form': Assign_ToForm(),
+            'payment_terms_form': Payment_TermsForm(),
+            'payment_type_form': Payment_TypeForm(),
+        })

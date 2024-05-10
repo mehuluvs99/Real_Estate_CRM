@@ -1,0 +1,73 @@
+<html>
+
+<head>
+    <title>Manage Models</title>
+</head>
+
+<body>
+    <h1>Add New Entries</h1>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ project_form.as_p }}
+        <button type="submit" name="project_form">Add Project</button>
+    </form>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ field_form.as_p }}
+        <button type="submit" name="field_form">Add Field</button>
+    </form>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ inquiry_type_form.as_p }}
+        <button type="submit" name="inquiry_type_form">Add Inquiry Type</button>
+    </form>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ inquiry_stage_form.as_p }}
+        <button type="submit" name="inquiry_stage_form">Add Inquiry Stage</button>
+    </form>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ selected_unit_form.as_p }}
+        <button type="submit" name="selected_unit_form">Add Unit</button>
+    </form>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ assign_to_form.as_p }}
+        <button type="submit" name="assign_to_form">Add Employee</button>
+    </form>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ payment_terms_form.as_p }}
+        <button type="submit" name="payment_terms_form">Add Payments Terms</button>
+    </form>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ payment_type_form.as_p }}
+        <button type="submit" name="payment_type_form">Add Payment Type</button>
+    </form>
+
+
+    <!-- Add similar forms for other models -->
+
+    <h2>Current Entries</h2>
+    <!-- Display existing entries with options to update/delete -->
+    <ul>
+        {% for project in Project_Name.objects.all %}
+        <li>{{ project.projectname }}
+            <a href="{% url 'update_project' project.id %}">Update</a>
+            <a href="{% url 'delete_project' project.id %}">Delete</a>
+        </li>
+        {% endfor %}
+    </ul>
+</body>
+
+</html>

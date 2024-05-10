@@ -138,3 +138,44 @@ class AgentForm(forms.ModelForm):
                 attrs={'class': 'form-control form-control-lg', 'placeholder': 'WhatsApp Number'}),
             "address": forms.TextInput(attrs={'class': 'form-control form-control-lg', 'placeholder': 'Address'}),
         }
+
+class ProjectForm(forms.ModelForm):
+    class Meta:
+        model = Project_Name
+        fields = ['projectname']
+
+
+class FieldForm(forms.ModelForm):
+    class Meta:
+        model = Fields
+        fields = ['fields']
+
+class Inquiry_TypeForm(forms.ModelForm):
+    class Meta:
+        model = Fields
+        fields = ['inquiry_type']
+
+class Inquiry_StageForm(forms.ModelForm):
+    class Meta:
+        model = Fields
+        fields = ['inquiry_stage']
+
+class Selected_UnitForm(forms.ModelForm):
+    class Meta:
+        model = Fields
+        fields = ['selected_unit']
+
+class Assign_ToForm(forms.ModelForm):
+    class Meta:
+        model = Fields
+        fields = ['assign_to']
+
+class Payment_TermsForm(forms.ModelForm):
+    class Meta:
+        model = Fields
+        fields = ['payment_terms']
+
+class Payment_TypeForm(forms.ModelForm):
+    class Meta:
+        model = Fields
+        fields = ['payment_type']

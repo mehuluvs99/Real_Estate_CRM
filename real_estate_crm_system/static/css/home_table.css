@@ -16,6 +16,18 @@ body, html {
   background-color: #090490;
 }
 
+@media (hover: hover) and (pointer: fine) {
+  .tabulator-row.tabulator-selectable:hover .tabulator-cell {
+      background-color: #2544b7;
+      color:white;
+  }
+}
+.tabulator-row .tabulator-cell {
+  border-right: 2px solid #fff;
+  padding: 6px 4px;
+  background-color:transparent;
+}
+
 #search-bar {
   font-size: 15px; /* Adjust font size as needed */
   margin: 50px auto 10px auto; /* Adjust margin as needed */

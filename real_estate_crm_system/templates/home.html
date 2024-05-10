@@ -60,6 +60,12 @@
                 data: tableData,
                 layout: "fitColumns",
                 pagination: "local",
+                rowMouseEnter: function(e, row) {
+                    row.getElement().style.backgroundColor = "#f0f0f0"; // Change background color on hover
+                },
+                rowMouseLeave: function(e, row) {
+                    row.getElement().style.backgroundColor = ""; // Revert to default background color on mouse leave
+                },
                 frozenRows:0,
                 frozenColumns:3,
                 movableColumns:true,
@@ -91,21 +97,26 @@
                 ],
             });
 
+
+
+
             function stage(cell) {
                 var data = cell.getRow().getData();
                 var stage = data['inquiry_stage'];
+                console.log(stage);
                 if (stage === "Converted") {
                     // Apply background color to the row
                     var rowElement = cell.getRow().getElement();
                     rowElement.style.backgroundColor = "#38ff63";
                     rowElement.style.color = "#000000"; // White font color
-                }
-                if (stage === "Site Visited") {
+                } else if (stage === "Site Visited") {
                     // Apply background color to the row
                     var rowElement = cell.getRow().getElement();
                     rowElement.style.backgroundColor = "#ffed47";
                     rowElement.style.color = "#000000"; // White font color
                 }
+
+                return stage;
             }
 
             function type(cell){
@@ -117,6 +128,8 @@
                     rowElement.style.backgroundColor = "#ff384c";
                     rowElement.style.color = "#000000"; // White font color
                 }
+
+                return type;
             }
             
             var nameInput = document.getElementById('name-input');

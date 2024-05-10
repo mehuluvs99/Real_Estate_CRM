@@ -14,4 +14,7 @@ urlpatterns = [
     path('payment/', views.payment, name='payment'),
     path('agent/', views.agent, name='agent'),
     path('agent_data/', views.agent_data, name='agent_data'),
+    # path('matplotlib-visualization/', views.matplotlib_visualization, name='matplotlib_visualization'),
+    path('manage/', views.ManageModelsView.as_view(), name='manage_models'),
+
 ]
