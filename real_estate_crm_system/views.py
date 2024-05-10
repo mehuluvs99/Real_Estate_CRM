@@ -382,6 +382,11 @@ def upload_account_file(request):
     return render(request, 'upload_account.html')
 
 
+from django.shortcuts import render, redirect
+from django.views import View
+from .forms import *
+from .models import *
+
 class ManageModelsView(View):
     def get(self, request):
         # Initialize all forms
@@ -394,7 +399,17 @@ class ManageModelsView(View):
         payment_terms_form = Payment_TermsForm()
         payment_type_form = Payment_TypeForm()
 
-        # Render the form page with all form instances
+        # Get all existing objects from each model
+        project_forms = Project_Name.objects.all()
+        field_forms = Fields.objects.all()
+        inquiry_type_forms = Inquiry_Type.objects.all()
+        inquiry_stage_forms = Inquiry_Stage.objects.all()
+        selected_unit_forms = Selected_Unit.objects.all()
+        assign_to_forms = Assign_To.objects.all()
+        payment_terms_forms = Payment_Terms.objects.all()
+        payment_type_forms = Payment_Type.objects.all()
+
+        # Render the form page with all form instances and existing objects
         return render(request, 'manage_models.html', {
             'project_form': project_form,
             'field_form': field_form,
@@ -403,11 +418,19 @@ class ManageModelsView(View):
             'selected_unit_form': selected_unit_form,
             'assign_to_form': assign_to_form,
             'payment_terms_form': payment_terms_form,
-            'payment_type_form': payment_type_form
+            'payment_type_form': payment_type_form,
+            'project_forms': project_forms,
+            'field_forms': field_forms,
+            'inquiry_type_forms': inquiry_type_forms,
+            'inquiry_stage_forms': inquiry_stage_forms,
+            'selected_unit_forms': selected_unit_forms,
+            'assign_to_forms': assign_to_forms,
+            'payment_terms_forms': payment_terms_forms,
+            'payment_type_forms': payment_type_forms,
         })
 
     def post(self, request):
-        # Dictionary mapping form names to their corresponding form instances
+        # Dictionary mapping form names to their corresponding form classes
         form_instances = {
             'project_form': ProjectForm,
             'field_form': FieldForm,
@@ -437,4 +460,12 @@ class ManageModelsView(View):
             'assign_to_form': Assign_ToForm(),
             'payment_terms_form': Payment_TermsForm(),
             'payment_type_form': Payment_TypeForm(),
+            'project_forms': Project_Name.objects.all(),
+            'field_forms': Fields.objects.all(),
+            'inquiry_type_forms': Inquiry_Type.objects.all(),
+            'inquiry_stage_forms': Inquiry_Stage.objects.all(),
+            'selected_unit_forms': Selected_Unit.objects.all(),
+            'assign_to_forms': Assign_To.objects.all(),
+            'payment_terms_forms': Payment_Terms.objects.all(),
+            'payment_type_forms': Payment_Type.objects.all(),
         })

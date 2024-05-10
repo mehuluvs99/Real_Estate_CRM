@@ -1,65 +1,139 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
 <html>
 
 <head>
     <title>Manage Models</title>
+    <link rel="stylesheet" href="{% static 'css/manage_models.css' %}">
 </head>
 
 <body>
-    <h1>Add New Entries</h1>
+        <div class="column">
+            <h2>Add Project</h2>
+            <form method="post">
+                {% csrf_token %}
+                {{ project_form.as_p }}
+                <button type="submit" name="project_form">Add Project</button>
+            </form>
+            <h3>Existing Projects</h3>
+            <ul>
+                {% for project in project_forms %}
+                <li>{{ project.projectname }}</li>
+                {% empty %}
+                <li>No projects found.</li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="column">
+            <h2>Add Field</h2>
+            <form method="post">
+                {% csrf_token %}
+                {{ field_form.as_p }}
+                <button type="submit" name="field_form">Add Field</button>
+            </form>
+            <h3>Existing Field</h3>
+            <ul>
+                {% for field in field_forms %}
+                <li>{{ field.fields }}</li>
+                {% empty %}
+                <li>No Field Found.</li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="column">
+            <form method="post">
+                {% csrf_token %}
+                {{ inquiry_type_form.as_p }}
+                <button type="submit" name="inquiry_type_form">Add Inquiry Type</button>
+            </form>
+            <h3>Existing Inquiry Type</h3>
+            <ul>
+                {% for inquirytype in inquiry_type_forms %}
+                <li>{{ inquirytype.inquiry_type }}</li>
+                {% empty %}
+                <li>No Inquiry Type Found.</li>
+                {% endfor %}
+            </ul>
 
-    <form method="post">
-        {% csrf_token %}
-        {{ project_form.as_p }}
-        <button type="submit" name="project_form">Add Project</button>
-    </form>
-
-    <form method="post">
-        {% csrf_token %}
-        {{ field_form.as_p }}
-        <button type="submit" name="field_form">Add Field</button>
-    </form>
-
-    <form method="post">
-        {% csrf_token %}
-        {{ inquiry_type_form.as_p }}
-        <button type="submit" name="inquiry_type_form">Add Inquiry Type</button>
-    </form>
-
-    <form method="post">
-        {% csrf_token %}
-        {{ inquiry_stage_form.as_p }}
-        <button type="submit" name="inquiry_stage_form">Add Inquiry Stage</button>
-    </form>
-
-    <form method="post">
-        {% csrf_token %}
-        {{ selected_unit_form.as_p }}
-        <button type="submit" name="selected_unit_form">Add Unit</button>
-    </form>
-
-    <form method="post">
-        {% csrf_token %}
-        {{ assign_to_form.as_p }}
-        <button type="submit" name="assign_to_form">Add Employee</button>
-    </form>
-
-    <form method="post">
-        {% csrf_token %}
-        {{ payment_terms_form.as_p }}
-        <button type="submit" name="payment_terms_form">Add Payments Terms</button>
-    </form>
-
-    <form method="post">
-        {% csrf_token %}
-        {{ payment_type_form.as_p }}
-        <button type="submit" name="payment_type_form">Add Payment Type</button>
-    </form>
-
-
-    <!-- Add similar forms for other models -->
+        </div>
+        <div class="column">
+            <form method="post">
+                {% csrf_token %}
+                {{ inquiry_stage_form.as_p }}
+                <button type="submit" name="inquiry_stage_form">Add Inquiry Stage</button>
+            </form>
+            <h3>Existing Inquiry Stage</h3>
+            <ul>
+                {% for inquirystage in inquiry_stage_forms %}
+                <li>{{ inquirystage.inquiry_stage }}</li>
+                {% empty %}
+                <li>No Inquiry Type Found.</li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="column">
+            <form method="post">
+                {% csrf_token %}
+                {{ selected_unit_form.as_p }}
+                <button type="submit" name="selected_unit_form">Add Unit</button>
+            </form>
+            <h3>Existing Unit</h3>
+            <ul>
+                {% for selectedunit in selected_unit_forms %}
+                <li>{{ selectedunit.selected_unit }}</li>
+                {% empty %}
+                <li>No Unit.</li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="column">
+            <form method="post">
+                {% csrf_token %}
+                {{ assign_to_form.as_p }}
+                <button type="submit" name="assign_to_form">Add Employee</button>
+            </form>
+            <h3>Existing Employee To</h3>
+            <ul>
+                {% for assignto in assign_to_forms %}
+                <li>{{ assignto.assign_to }}</li>
+                {% empty %}
+                <li>No Assign To Found.</li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="column">
+            <form method="post">
+                {% csrf_token %}
+                {{ payment_terms_form.as_p }}
+                <button type="submit" name="payment_terms_form">Add Payments Terms</button>
+            </form>
+            <h3>Existing Payments Type</h3>
+            <ul>
+                {% for paymentterm in payment_terms_forms %}
+                <li>{{ paymentterm.payment_terms }}</li>
+                {% empty %}
+                <li>No Payment Term Found.</li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="column">
+            <form method="post">
+                {% csrf_token %}
+                {{ payment_type_form.as_p }}
+                <button type="submit" name="payment_type_form">Add Payment Type</button>
+            </form>
+            <h3>Existing Payments Type</h3>
+            <ul>
+                {% for paymenttype in payment_type_forms %}
+                <li>{{ paymenttype.payment_type }}</li>
+                {% empty %}
+                <li>No Payment Type Found.</li>
+                {% endfor %}
+            </ul>
+        </div>
 
     <h2>Current Entries</h2>
-    <!-- Display existing entries with options to update/delete -->
     <ul>
         {% for project in Project_Name.objects.all %}
         <li>{{ project.projectname }}
@@ -71,3 +145,5 @@
 </body>
 
 </html>
+
+{% endblock %}

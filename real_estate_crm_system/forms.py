@@ -152,30 +152,30 @@ class FieldForm(forms.ModelForm):
 
 class Inquiry_TypeForm(forms.ModelForm):
     class Meta:
-        model = Fields
+        model = Inquiry_Type
         fields = ['inquiry_type']
 
 class Inquiry_StageForm(forms.ModelForm):
     class Meta:
-        model = Fields
+        model = Inquiry_Stage
         fields = ['inquiry_stage']
 
 class Selected_UnitForm(forms.ModelForm):
     class Meta:
-        model = Fields
+        model = Selected_Unit
         fields = ['selected_unit']
 
 class Assign_ToForm(forms.ModelForm):
     class Meta:
-        model = Fields
+        model = Assign_To
         fields = ['assign_to']
 
 class Payment_TermsForm(forms.ModelForm):
     class Meta:
-        model = Fields
+        model = Payment_Terms
         fields = ['payment_terms']
 
 class Payment_TypeForm(forms.ModelForm):
     class Meta:
-        model = Fields
+        model = Payment_Type
         fields = ['payment_type']
