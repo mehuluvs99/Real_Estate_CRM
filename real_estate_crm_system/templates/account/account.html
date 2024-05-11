@@ -14,6 +14,7 @@
 </head>
 
 <body>
+  {% if user.is_authenticated %}
   <div class="container">
     <h3>Create Account</h3>
       <form method="post">
@@ -114,6 +115,9 @@
 
       </form>
   </div>
+  {% else %}
+  {% include 'login_signup/login.html' %}
+  {% endif %}
 </body>
 
 </html>

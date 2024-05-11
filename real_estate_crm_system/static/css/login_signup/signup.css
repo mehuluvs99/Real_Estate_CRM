@@ -1,114 +1,72 @@
-/* CSS for Signup Page */
-
+/* Reset default browser styles */
 body {
-    background-color: darkblue;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    background-color:darkblue;
+    font-family:calibri;
 }
-
-.signup-container {
-    width: 100%;
-    max-width: 600px;
+  
+  /* Container styling */
+  .signup-container {
+    max-width: 800px;
     margin: 50px auto;
-    padding: 20px;
+    padding: 30px;
+    /* padding-left:40px; */
+    border: 1px solid #ccc;
+    border-radius: 10px;
     background-color: #f7f7f7;
-    border-radius: 5px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-    font-family: calibri;
-}
-
-.signup-container h3 {
+  }
+  
+  .signup-container h3 {
     text-align: center;
     margin-bottom: 20px;
-    color: #333;
-}
-
-.form-group {
-    margin-bottom: 20px;
-    margin-right: 20px;
-}
-
-.form-group label {
-    display: block;
-    margin-bottom: 5px;
-    color: #333;
-}
-
-.form-group input {
+  }
+  
+  /* Form styling */
+  form {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  
+  .col-md-4 {
+    flex: 0 0 45%; /* Adjust column width */
+    margin-bottom: 1px;
+  }
+  
+  /* Label styling */
+  label {
+    font-weight: bold;
+  }
+  
+  /* Input field styling */
+  input[type="text"],
+  input[type="password"],
+  select {
     width: 100%;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    font-size: 16px;
-}
-
-.btn-primary {
-    padding: 10px 20px;
+    margin-bottom: 10px;
+    box-sizing: border-box; /* Ensure padding and border are included in width */
+  }
+  
+  /* Button styling */
+  .btn-primary {
     background-color: #007bff;
+    color: #fff;
+    padding: 10px 44%;
     border: none;
     border-radius: 5px;
-    color: #fff;
-    font-size: 16px;
     cursor: pointer;
-}
-
-.btn-primary:hover {
+  }
+  
+  .btn-primary:hover {
     background-color: #0056b3;
-}
-
-.form-group {
-    margin-bottom: 20px;
-}
-
-/* Label style */
-.form-group label {
-    display: block;
-    margin-bottom: 5px;
-    color: #333;
-}
-
-/* Dropdown select style */
-.form-group select {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 16px;
-    font-family: calibri;
-    appearance: none; /* Remove default arrow */
-    -webkit-appearance: none; /* Remove default arrow for Safari */
-    background-color: #fff; /* Dropdown background color */
-    cursor: pointer;
-}
-
-/* Dropdown arrow icon */
-.form-group select::-ms-expand {
-    display: none;
-}
-
-/* Hover effect on dropdown */
-.form-group select:hover {
-    border-color: #007bff; /* Change border color on hover */
-}
-
-/* Focus effect on dropdown */
-.form-group select:focus {
-    border-color: #007bff; /* Change border color on focus */
-    outline: none; /* Remove default focus outline */
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Add box shadow on focus */
-}
-
-
-.btn-primary {
-    width: 100%;
-    padding: 10px;
-    background-color: #007bff;
-    border: none;
-    border-radius: 5px;
-    color: #fff;
-    font-size: 16px;
-    cursor: pointer;
-}
-
-.btn-primary:hover {
-    background-color: #0056b3;
-}
+  }
+    
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .col-md-4 {
+      flex: 0 0 45%; /* Adjust column width for smaller screens */
+    }
+  }
+  
