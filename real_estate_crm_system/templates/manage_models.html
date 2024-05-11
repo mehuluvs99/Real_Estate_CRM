@@ -6,190 +6,225 @@
 <head>
     <title>Manage Models</title>
     <link rel="stylesheet" href="{% static 'css/manage_models.css' %}">
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
             // Handle update button click
-            $('ul').on('click', '.update-btn', function(e) {
+            $('ul').on('click', '.update-btn', function (e) {
                 e.preventDefault();
                 var listItem = $(this).closest('li');
-                var fieldValue = listItem.text().replace("Update","").replace("Delete","").trim();
+                var fieldValue = listItem.text().replace("Update", "").replace("Delete", "").trim();
                 // Populate the corresponding form field with the selected value
                 listItem.closest('.column').find('input[type="text"]').val(fieldValue);
             });
         });
     </script>
-    <script>
-        $(document).ready(function() {
-            // Handle click event on delete button
-            $('.delete-btn').on('click', function(e) {
-                e.preventDefault();
-                var projectId = $(this).data('project-id');
-                var confirmation = confirm('Are you sure you want to delete this project?');
-                if (confirmation) {
-                    window.location.href = '{% url "delete_project" 0 %}'.replace('0', projectId);
-                }
-            });
-        });
-    </script>
+
 </head>
 
 <body>
-        <div class="column">
-            <!-- <h2>Add Project</h2> -->
-            <form method="post">
-        {% csrf_token %}
-        <label for="{{ project_form.id_for_label }}">Add Project</label>
-        {{ project_form.projectname }}
-        <button type="submit" name="project_form">Add Project</button>
-    </form>
-    <ul>
-        {% for project in project_forms %}
-        <li>{{ project.projectname }}
-            <a href="#" class="update-btn">Update</a>
-            <a href="#" class="delete-btn" data-project-id="{{ project.id }}">Delete</a>
-        </li>
-        {% empty %}
-        <li>No projects found.</li>
-        {% endfor %}
-    </ul>
-        </div>
-        <div class="column">
-            <!-- <h2>Add Field</h2> -->
-            <form method="post">
-                {% csrf_token %}
-                <label for="{{ field_form.id_for_label }}">Field</label>
-                {{ field_form.fields }}
-                <button type="submit" name="field_form">Add Field</button>
-            </form>
-            <!-- <h3>Existing Field</h3> -->
-            <ul>
-                {% for field in field_forms %}
-                <li>{{ field.fields }}</li>
-                {% empty %}
-                <li>No Field Found.</li>
-                {% endfor %}
-            </ul>
-        </div>
-        <div class="column">
-            <!-- <h2>Add Inquiry Type</h2> -->
-            <form method="post">
-                {% csrf_token %}
-                <label for="{{ inquiry_type_form.id_for_label }}">Inquiry Type</label>
-                {{ inquiry_type_form.inquiry_type }}
-                <!-- {{ inquiry_type_form.as_p }} -->
-                <button type="submit" name="inquiry_type_form">Add Inquiry Type</button>
-            </form>
-            <!-- <h3>Existing Inquiry Type</h3> -->
-            <ul>
-                {% for inquirytype in inquiry_type_forms %}
-                <li>{{ inquirytype.inquiry_type }}</li>
-                {% empty %}
-                <li>No Inquiry Type Found.</li>
-                {% endfor %}
-            </ul>
+    {% if user.is_authenticated %}
+    <div class="column">
+        <!-- <h2>Add Project</h2> -->
+        <form method="post">
+            {% csrf_token %}
+            <label for="{{ project_form.id_for_label }}">Add Project</label>
+            {{ project_form.projectname }}
+            <button type="submit" name="project_form">Add Project</button>
+        </form>
+        <ul>
+            {% for project in project_forms %}
+            <li>
+                {{ project.projectname }}
+                <span class="action-icons">
+                    <a href="#" class="update-btn"><i class="fas fa-edit"></i></a>
+                    <a href="{% url 'delete_object' 'project' project.id %}" class="delete-btn"
+                        data-object-id="{{ project.id }}"><i class="fas fa-trash"></i></a>
+                </span>
+            </li>
+            {% empty %}
+            <li>No projects found.</li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="column">
+        <form method="post">
+            {% csrf_token %}
+            <label for="{{ field_form.id_for_label }}">Field</label>
+            {{ field_form.fields }}
+            <button type="submit" name="field_form">Add Field</button>
+        </form>
+        <ul>
+            {% for field in field_forms %}
+            <li>
+                {{ field.fields }}
+                <span class="action-icons">
+                    <a href="#" class="update-btn"><i class="fas fa-edit"></i></a>
+                    <a href="{% url 'delete_object' 'field' field.id %}" class="delete-btn"
+                        data-object-id="{{ field.id }}"><i class="fas fa-trash"></i></a>
 
-        </div>
-        <div class="column">
-            <!-- <h2>Add Inquiry Stage</h2> -->
-            <form method="post">
-                {% csrf_token %}
-                <label for="{{ inquiry_stage_form.id_for_label }}">Inquiry Stage</label>
-                {{ inquiry_stage_form.inquiry_stage }}
-                <!-- {{ inquiry_stage_form.as_p }} -->
-                <button type="submit" name="inquiry_stage_form">Add Inquiry Stage</button>
-            </form>
-            <!-- <h3>Existing Inquiry Stage</h3> -->
-            <ul>
-                {% for inquirystage in inquiry_stage_forms %}
-                <li>{{ inquirystage.inquiry_stage }}</li>
-                {% empty %}
-                <li>No Inquiry Type Found.</li>
-                {% endfor %}
-            </ul>
-        </div>
-        <div class="column">
-            <!-- <h2>Add Employee</h2> -->
-            <form method="post">
-                {% csrf_token %}
-                <label for="{{ assign_to_form.id_for_label }}">Add Employee</label>
-                {{ assign_to_form.assign_to }}
-                <!-- {{ assign_to_form.as_p }} -->
-                <button type="submit" name="assign_to_form">Add Employee</button>
-            </form>
-            <!-- <h3>Existing Employee To</h3> -->
-            <ul>
-                {% for assignto in assign_to_forms %}
-                <li>{{ assignto.assign_to }}</li>
-                {% empty %}
-                <li>No Assign To Found.</li>
-                {% endfor %}
-            </ul>
-        </div>
-        <div class="column">
-            <!-- <h2>Add Payments Terms</h2> -->
-            <form method="post">
-                {% csrf_token %}
-                <label for="{{ payment_terms_form.id_for_label }}">Payment Terms</label>
-                {{ payment_terms_form.payment_terms }}
-                <!-- {{ payment_terms_form.as_p }} -->
-                <button type="submit" name="payment_terms_form">Add Payment Terms</button>
-            </form>
-            <!-- <h3>Existing Payments Type</h3> -->
-            <ul>
-                {% for paymentterm in payment_terms_forms %}
-                <li>{{ paymentterm.payment_terms }}</li>
-                {% empty %}
-                <li>No Payment Term Found.</li>
-                {% endfor %}
-            </ul>
-        </div>
-        <div class="column">
-            <!-- <h2>Add Payment Type</h2> -->
-            <form method="post">
-                {% csrf_token %}
-                <label for="{{ payment_type_form.id_for_label }}">Payment Type</label>
-                {{ payment_type_form.payment_type }}
-                <!-- {{ payment_type_form.as_p }} -->
-                <button type="submit" name="payment_type_form">Add Payment Type</button>
-            </form>
-            <!-- <h3>Existing Payments Type</h3> -->
-            <ul>
-                {% for paymenttype in payment_type_forms %}
-                <li>{{ paymenttype.payment_type }}</li>
-                {% empty %}
-                <li>No Payment Type Found.</li>
-                {% endfor %}
-            </ul>
-        </div>
-        <div class="row">
-            <!-- <h2>Add Unit</h2> -->
-            <form method="post">
-                {% csrf_token %}
-                <label for="{{ selected_unit_form.id_for_label }}">Unit</label>
-                {{ selected_unit_form.selected_unit }}
-                <!-- {{ selected_unit_form.as_p }} -->
-                <button type="submit" name="selected_unit_form">Add Unit</button>
-            </form>
-            <!-- <h3>Existing Unit</h3> -->
-            <ul>
-                {% for selectedunit in selected_unit_forms %}
-                <li>{{ selectedunit.selected_unit }}</li>
-                {% empty %}
-                <li>No Unit.</li>
-                {% endfor %}
-            </ul>
-        </div>
+                </span>
+            </li>
+            {% empty %}
+            <li>No field found.</li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="column">
+        <!-- <h2>Add Inquiry Type</h2> -->
+        <form method="post">
+            {% csrf_token %}
+            <label for="{{ inquiry_type_form.id_for_label }}">Inquiry Type</label>
+            {{ inquiry_type_form.inquiry_type }}
+            <!-- {{ inquiry_type_form.as_p }} -->
+            <button type="submit" name="inquiry_type_form">Add Inquiry Type</button>
+        </form>
+        <!-- <h3>Existing Inquiry Type</h3> -->
+        <ul>
+            {% for inquirytype in inquiry_type_forms %}
+            <li>{{ inquirytype.inquiry_type }}
+                <span class="action-icons">
+                    <a href="#" class="update-btn"><i class="fas fa-edit"></i></a>
+                    <a href="{% url 'delete_object' 'inquiry_type' inquirytype.id %}" class="delete-btn"
+                        data-object-id="{{ inquirytype.id }}"><i class="fas fa-trash"></i></a>
+                </span>
+            </li>
+            {% empty %}
+            <li>No Inquiry Type Found.</li>
+            {% endfor %}
+        </ul>
 
-    <!-- <h2>Current Entries</h2>
-    <ul>
-        {% for project in Project_Name.objects.all %}
-        <li>{{ project.projectname }}
-            <a href="{% url 'update_project' project.id %}">Update</a>
-            <a href="{% url 'delete_project' project.id %}">Delete</a>
-        </li>
-        {% endfor %}
-    </ul> -->
+    </div>
+    <div class="column">
+        <!-- <h2>Add Inquiry Stage</h2> -->
+        <form method="post">
+            {% csrf_token %}
+            <label for="{{ inquiry_stage_form.id_for_label }}">Inquiry Stage</label>
+            {{ inquiry_stage_form.inquiry_stage }}
+            <!-- {{ inquiry_stage_form.as_p }} -->
+            <button type="submit" name="inquiry_stage_form">Add Inquiry Stage</button>
+        </form>
+        <!-- <h3>Existing Inquiry Stage</h3> -->
+        <ul>
+            {% for inquirystage in inquiry_stage_forms %}
+            <li>{{ inquirystage.inquiry_stage }}
+                <span class="action-icons">
+                    <a href="#" class="update-btn"><i class="fas fa-edit"></i></a>
+                    <a href="{% url 'delete_object' 'inquiry_stage' inquirystage.id %}" class="delete-btn"
+                        data-object-id="{{ inquirystage.id }}"><i class="fas fa-trash"></i></a>
+
+                </span>
+            </li>
+            {% empty %}
+            <li>No Inquiry Type Found.</li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="column">
+        <!-- <h2>Add Employee</h2> -->
+        <form method="post">
+            {% csrf_token %}
+            <label for="{{ assign_to_form.id_for_label }}">Add Employee</label>
+            {{ assign_to_form.assign_to }}
+            <!-- {{ assign_to_form.as_p }} -->
+            <button type="submit" name="assign_to_form">Add Employee</button>
+        </form>
+        <!-- <h3>Existing Employee To</h3> -->
+        <ul>
+            {% for assignto in assign_to_forms %}
+            <li>{{ assignto.assign_to }}
+                <span class="action-icons">
+                    <a href="#" class="update-btn"><i class="fas fa-edit"></i></a>
+                    <a href="{% url 'delete_object' 'assign_to' assignto.id %}" class="delete-btn"
+                        data-object-id="{{ assignto.id }}"><i class="fas fa-trash"></i></a>
+                </span>
+            </li>
+            {% empty %}
+            <li>No Assign To Found.</li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="column">
+        <!-- <h2>Add Payments Terms</h2> -->
+        <form method="post">
+            {% csrf_token %}
+            <label for="{{ payment_terms_form.id_for_label }}">Payment Terms</label>
+            {{ payment_terms_form.payment_terms }}
+            <!-- {{ payment_terms_form.as_p }} -->
+            <button type="submit" name="payment_terms_form">Add Payment Terms</button>
+        </form>
+        <!-- <h3>Existing Payments Type</h3> -->
+        <ul>
+            {% for paymentterm in payment_terms_forms %}
+            <li>{{ paymentterm.payment_terms }}
+                <span class="action-icons">
+                    <a href="#" class="update-btn"><i class="fas fa-edit"></i></a>
+                    <a href="{% url 'delete_object' 'payment_terms' paymentterm.id %}" class="delete-btn"
+                        data-object-id="{{ paymentterm.id }}"><i class="fas fa-trash"></i></a>
+
+                </span>
+            </li>
+            {% empty %}
+            <li>No Payment Term Found.</li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="column">
+        <!-- <h2>Add Payment Type</h2> -->
+        <form method="post">
+            {% csrf_token %}
+            <label for="{{ payment_type_form.id_for_label }}">Payment Type</label>
+            {{ payment_type_form.payment_type }}
+            <!-- {{ payment_type_form.as_p }} -->
+            <button type="submit" name="payment_type_form">Add Payment Type</button>
+        </form>
+        <!-- <h3>Existing Payments Type</h3> -->
+        <ul>
+            {% for paymenttype in payment_type_forms %}
+            <li>
+                {{ paymenttype.payment_type }}
+                <span class="action-icons">
+                    <a href="#" class="update-btn"><i class="fas fa-edit"></i></a>
+                    <a href="{% url 'delete_object' 'payment_type' paymenttype.id %}" class="delete-btn"
+                        data-object-id="{{ paymenttype.id }}"><i class="fas fa-trash"></i></a>
+
+                </span>
+            </li>
+            {% empty %}
+            <li>No Payment Type Found.</li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="row">
+        <form method="post">
+            {% csrf_token %}
+            <label for="{{ selected_unit_form.id_for_label }}">Unit</label>
+            {{ selected_unit_form.selected_unit }}
+            <!-- {{ selected_unit_form.as_p }} -->
+            <button type="submit" name="selected_unit_form">Add Unit</button>
+        </form>
+        <!-- <h3>Existing Unit</h3> -->
+        <div class="grid-container">
+            {% for selectedunit in selected_unit_forms %}
+            <li>
+                {{ selectedunit.selected_unit }}
+                <span class="action-icons">
+                    <a href="#" class="update-btn"><i class="fas fa-edit"></i></a>
+                    <a href="{% url 'delete_object' 'unit' selectedunit.id %}" class="delete-btn"
+                        data-object-id="{{ selectedunit.id }}"><i class="fas fa-trash"></i></a>
+
+                </span>
+            </li>
+            {% empty %}
+            <li>No Unit.</li>
+            {% endfor %}
+        </div>
+    </div>
+    {% else %}
+    {% include 'login.html' %}
+    {% endif %}
 </body>
 
 </html>

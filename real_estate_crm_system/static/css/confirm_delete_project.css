@@ -1,0 +1,37 @@
+.confirm-delete-container {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+.confirm-delete-container h2 {
+    font-size: 24px;
+    margin-bottom: 15px;
+}
+
+.confirm-delete-container p {
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+.confirm-delete-container form {
+    display: inline-block;
+}
+
+.confirm-delete-container .delete-btn {
+    background-color: #dc3545;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.confirm-delete-container .cancel-btn {
+    color: #007bff;
+    text-decoration: none;
+    margin-left: 10px;
+}

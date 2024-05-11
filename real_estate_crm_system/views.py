@@ -466,21 +466,41 @@ class ManageModelsView(View):
         })
 
 
-def delete_project(request, project_id):
-    project = get_object_or_404(Project_Name, pk=project_id)
+def delete_object(request, object_type, object_id):
+    # Define a dictionary mapping object types to their corresponding models
+    object_models = {
+        'project': Project_Name,
+        'field': Fields,
+        'inquiry_type': Inquiry_Type,
+        'inquiry_stage':Inquiry_Stage,
+        'unit':Selected_Unit,
+        'assign_to':Assign_To,
+        'payment_terms':Payment_Terms,
+        'payment_type':Payment_Type,
+    }
+    
+    # Retrieve the appropriate model based on the object type
+    model = object_models.get(object_type)
+    
+    if not model:
+        # Handle invalid object types gracefully
+        return render(request, 'manage_models.html', {'error_message': 'Invalid object type'})
+    
+    # Retrieve the object instance using the provided object_id
+    obj = get_object_or_404(model, pk=object_id)
     
     if request.method == 'POST':
         # If the request is a POST (typically from a form submission), proceed with deletion
-        project.delete()
+        obj.delete()
         return redirect('manage_models')  # Redirect to a success URL after deletion
 
     # If the request is not a POST (e.g., GET request), render a confirmation template
-    return render(request, 'confirm_delete_project.html', {'project': project})
+    return render(request, 'confirm_delete.html', {'object': obj, 'object_type': object_type})
 
 
-def project_list(request):
-    projects = Project_Name.objects.all()
-    return render(request, 'project_list.html', {'projects': projects})
+# def project_list(request):
+#     projects = Project_Name.objects.all()
+#     return render(request, 'project_list.html', {'projects': projects})
 
 
 def update_project(request, project_id):
