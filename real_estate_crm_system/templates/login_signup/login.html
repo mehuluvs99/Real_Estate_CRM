@@ -1,0 +1,15 @@
+<div class="login-container">
+    <div class="login-form">
+        <h1>Login</h1>
+        <form method="POST" action="{% url 'home' %}">
+            {% csrf_token %}
+            <div class="login-input">
+                <input type="text" class="login-input-field" name="username" placeholder="Username" required>
+            </div>
+            <div class="login-input">
+                <input type="password" class="login-input-field" name="password" placeholder="Password" required>
+            </div>
+            <button type="submit" class="login-button">Login</button>
+        </form>
+    </div>
+</div>

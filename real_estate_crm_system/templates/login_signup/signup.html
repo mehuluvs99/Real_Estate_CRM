@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<head>
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign Up</title>
+  <link rel="stylesheet" href="{% static 'css/signup.css' %}">
+<!--   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">-->
+</head>
+</head>
+
+<body>
+  <div class="signup-container">
+    <h3>Sign Up</h3>
+    <form method="post">
+      {% csrf_token %}
+      <div class="col-2">
+        <div class="form-group col-md-4">
+          <label for="{{ form.first_name.id_for_label }}">First Name</label>
+          {{ form.first_name }}
+        </div>
+      </div>
+      <div class="form-group col-md-4">
+        <label for="{{ form.last_name.id_for_label }}">Last Name</label>
+        {{ form.last_name }}
+      </div>
+      <div class="form-group col-md-4">
+        <label for="{{ form.email_id.id_for_label }}">Email ID</label>
+        {{ form.email_id }}
+      </div>
+      <div class="form-group col-md-4">
+        <label for="{{ form.username.id_for_label }}">User Name</label>
+        {{ form.username }}
+      </div>
+      <div class="form-group col-md-4">
+        <label for="{{ form.password1.id_for_label }}">Password</label>
+        {{ form.password1 }}
+      </div>
+      <div class="form-group col-md-4">
+        <label for="{{ form.password2.id_for_label }}">Confirm Password</label>
+        {{ form.password2 }}
+      </div>
+      <div class="form-group col-md-4">
+        <label for="{{ form.project_name.id_for_label }}">Project Name</label>
+        {{ form.project_name }}
+      </div>
+      <div class="form-group col-md-4">
+        <label for="{{ form.fields.id_for_label }}">Fields</label>
+        {{ form.fields }}
+      </div>
+      <div class="form-group col-md-6">
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+    </form>
+  </div>
+</body>
+
+</html>
+
+{% endblock %}
+

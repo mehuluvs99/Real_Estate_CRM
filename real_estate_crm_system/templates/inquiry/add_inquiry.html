@@ -1,0 +1,107 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add Inquiry</title>
+  <link rel="stylesheet" href="{% static 'css/add_inquiry_form.css' %}">
+
+</head>
+
+<body>
+  <div class="add_inquiry-container">
+    <h3>Add Inquiry</h3>
+    <form method="post">
+      {% csrf_token %}
+      <div class="form-group col-md-4">
+        <label for="{{ form.first_name.id_for_label }}">First Name</label>
+        {{ form.first_name }}
+      </div>
+      <div class="form-group col-md-4">
+        <label for="{{ form.middle_name.id_for_label }}">Middle Name</label>
+        {{ form.middle_name }}
+      </div>
+      <div class="form-group col-md-4">
+        <label for="{{ form.last_name.id_for_label }}">Last Name</label>
+        {{ form.last_name }}
+      </div>
+      <div class="form-group col-md-4">
+        <label for="{{ form.mobile_number.id_for_label }}">Mobile Number</label>
+        {{ form.mobile_number }}
+      </div>
+      <div class="form-group col-md-4">
+        <label for="{{ form.whatsapp_mobile_number.id_for_label }}">WhatsApp Mobile Number</label>
+        {{ form.whatsapp_mobile_number }}
+      </div>
+      <div class="form-group col-md-4">
+        <label for="{{ form.email_id.id_for_label }}">Email</label>
+        {{ form.email_id }}
+      </div>
+      <div class="form-group col-md-4">
+        <label for="{{ form.address.id_for_label }}">Address</label>
+        {{ form.address }}
+      </div>
+      <div class="form-group col-md-2">
+        <label for="{{ form.area.id_for_label }}">Area</label>
+        {{ form.area }}
+      </div>
+      <div class="form-group col-md-2">
+        <label for="{{ form.city.id_for_label }}">City</label>
+        {{ form.city }}
+      </div>
+      <div class="form-group col-md-2">
+        <label for="{{ form.state.id_for_label }}">State</label>
+        {{ form.state }}
+      </div>
+      <div class="form-group col-md-2">
+        <label for="{{ form.country.id_for_label }}">Country</label>
+        {{ form.country }}
+      </div>
+      <div class="form-group col-md-2">
+        <label for="{{ form.inquiry_type.id_for_label }}">Inquiry Type</label>
+        {{ form.inquiry_type }}
+      </div>
+      <div class="form-group col-md-2">
+        <label for="{{ form.inquiry_stage.id_for_label }}">Inquiry Stage</label>
+        {{ form.inquiry_stage }}
+      </div>
+      <div class="form-group col-md-2">
+        <label for="{{ form.interested_project.id_for_label }}">Interested Project</label>
+        {{ form.interested_project }}
+      </div>
+      <div class="form-group col-md-2">
+        <label for="{{ form.selected_unit.id_for_label }}">Selected Unit</label>
+        {{ form.selected_unit }}
+      </div>
+      <div class="form-group col-md-2">
+        <label for="{{ form.converted_date.id_for_label }}">Converted Date</label>
+        {{ form.converted_date }}
+      </div>
+      <div class="form-group col-md-2">
+        <label for="{{ form.assign_to.id_for_label }}">Assign To</label>
+        {{ form.assign_to }}
+      </div>
+      <!--            <div class="form-group col-md-2">-->
+      <!--                <label for="{{ form.fields.id_for_label }}">Fields</label>-->
+      <!--                {{ form.fields }}-->
+      <!--            </div>-->
+      <div class="form-group col-md-2">
+        <label row="2" for="{{ form.remarks.id_for_label }}">Remarks</label>
+        {{ form.remarks }}
+      </div>
+      <!-- Add other fields here with similar formatting -->
+      <div class="form-group col-md-4">
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+    </form>
+  </div>
+</body>
+
+</html>
+
+{% endblock %}
