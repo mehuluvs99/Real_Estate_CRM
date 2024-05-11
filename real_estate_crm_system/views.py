@@ -29,7 +29,7 @@ def home(request):
             return redirect("home")
         else:
             messages.success(request, "There was an Error, Please try again")
-            return redirect('index')
+            return redirect('home')
     else:
         return render(request, 'home.html', {'records': records})
 
@@ -71,7 +71,7 @@ def signup(request):
             return redirect('home')  # Replace 'home' with the appropriate URL name
     else:
         form = SignUpForm()
-    return render(request, 'signup.html', {'form': form})
+    return render(request, 'login_signup/signup.html', {'form': form})
 
 
 def user_list(request):
@@ -88,7 +88,7 @@ def add_inquiry(request):
             return redirect('home')  # Replace 'home' with the appropriate URL name
     else:
         form = AddInquiryForm()
-    return render(request, 'add_inquiry.html', {'form': form})
+    return render(request, 'inquiry/add_inquiry.html', {'form': form})
 
 
 def account_data(request):
@@ -101,12 +101,12 @@ def account_data(request):
         if user is not None:
             login(request, user)
             messages.success(request, "You have been logged in!")
-            return redirect("home")
+            return redirect("account_data")
         else:
             messages.success(request, "There was an Error, Please try again")
-            return redirect('home')
+            return redirect('account_data')
     else:
-        return render(request, 'home.html', {'account_records': account_records})
+        return render(request, 'account/account_data.html', {'account_records': account_records})
 
 
 def accounts(request):
@@ -118,7 +118,7 @@ def accounts(request):
             return redirect('home')  # Replace 'home' with the appropriate URL name
     else:
         account = AccountsForm()
-    return render(request, 'account.html', {'form': account})
+    return render(request, 'account/account.html', {'form': account})
 
 
 def payment(request):
@@ -130,7 +130,7 @@ def payment(request):
             return redirect('home')  # Replace 'home' with the appropriate URL name
     else:
         form = PaymentForm()
-    return render(request, 'payment.html', {'form': form})
+    return render(request, 'account/payment.html', {'form': form})
 
 
 def agent(request):
@@ -138,11 +138,11 @@ def agent(request):
         form = AgentForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('agent.html')  # Replace 'home' with the appropriate URL name
+            return redirect('agent/agent.html')  # Replace 'home' with the appropriate URL name
     else:
         form = AgentForm()
 
-    return render(request, 'agent.html', {'form': form})
+    return render(request, 'agent/agent.html', {'form': form})
 
 def agent_data(request):
     agent_records = Agents.objects.all()
@@ -160,7 +160,7 @@ def agent_data(request):
             messages.success(request, "There was an Error, Please try again")
             return redirect('home')
     else:
-        return render(request, 'agent_data.html', {'agent_records': agent_records})
+        return render(request, 'agent/agent_data.html', {'agent_records': agent_records})
 
 
 
@@ -270,7 +270,7 @@ def upload_inquiry_file(request):
                 )
 
             return redirect('home')  # Redirect to a page after successful upload
-    return render(request, 'upload_inquiry.html')
+    return render(request, 'inquiry/upload_inquiry.html')
 
 
 def upload_account_file(request):
@@ -379,7 +379,7 @@ def upload_account_file(request):
                 )
 
             return redirect('upload_account')  # Redirect to a page after successful upload
-    return render(request, 'upload_account.html')
+    return render(request, 'account/upload_account.html')
 
 
 class ManageModelsView(View):
