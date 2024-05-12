@@ -19,27 +19,27 @@
     <h3>Recieve Payment</h3>
     <form method="post">
       {% csrf_token %}
-      <div class="form-group col-md-4">
+      <div>
         <label for="{{ form.unit.id_for_label }}">Unit</label>
         {{ form.unit }}
       </div>
-      <div class="form-group col-md-4">
+      <div>
         <label for="{{ form.amount_receive.id_for_label }}">Amount Received</label>
         {{ form.amount_receive }}
       </div>
-      <div class="form-group col-md-4">
+      <div>
         <label for="{{ form.payment_type.id_for_label }}">Payment Type</label>
         {{ form.payment_type }}
       </div>
-      <div class="form-group col-md-4">
+      <div>
         <label for="{{ form.gst.id_for_label }}">GST</label>
         {{ form.gst }}
       </div>
-      <div class="form-group col-md-4">
+      <div>
         <label for="{{ form.current_outstanding.id_for_label }}">Current Outstanding</label>
         {{ form.current_outstanding }}
       </div>
-      <div class="form-group col-md-6">
+      <div>
         <button type="submit" class="btn btn-primary">Submit</button>
       </div>
     </form>

@@ -1,14 +1,11 @@
 /* upload_inquiry.css */
 
-body {
-    background-color:darkblue;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-}
 
 .upload-inquiry-container {
-    margin: 70px;
+    margin-top: 50px;
     max-width:500px;
-    margin-left:500px;
+    padding:20px;
+    margin-left: 500px;
 }
 
 #file_upload {

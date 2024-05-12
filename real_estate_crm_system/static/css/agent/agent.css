@@ -1,18 +1,15 @@
-/* Reset default browser styles */
-body, html {
-  margin: 0;
-  padding: 0;
-  font-family: Arial, sans-serif;
+/* Style for the add_inquiry form */
+body {
+  background-color:darkblue;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
-
-/* Container styling */
 .agent-container {
   max-width: 800px;
-  margin: 50px auto;
-  padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+  margin: 70px auto;
+  padding: 10px;
   background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .agent-container h3 {
@@ -20,51 +17,60 @@ body, html {
   margin-bottom: 20px;
 }
 
-/* Form styling */
 form {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
 }
 
-.col-md-4 {
-  flex: 0 0 45%; /* Adjust column width */
-  margin-bottom: 15px;
+form>div {
+  flex: 0 0 50%;
+  /* Two columns per row */
+  padding: 10px;
+  box-sizing: border-box;
 }
 
-.form-group {
-  text-align: center;
+label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
 }
 
-/* Input field styling */
 input[type="text"],
 input[type="email"],
-input[type="number"] {
+input[type="number"],
+select,
+textarea {
   width: 100%;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-sizing: border-box;
   margin-bottom: 10px;
-  box-sizing: border-box; /* Ensure padding and border are included in width */
 }
 
-/* Button styling */
-.btn-primary {
-  background-color: #007bff;
-  color: #fff;
+textarea {
+  height: 100px;
+  /* Initial height */
+}
+
+button {
+  margin-top: 20px;
   padding: 10px 20px;
   border: none;
-  border-radius: 5px;
+  border-radius: 4px;
+  background-color: #007bff;
+  color: #fff;
   cursor: pointer;
+  width: 205%
 }
 
-.btn-primary:hover {
+button:hover {
   background-color: #0056b3;
 }
 
-/* Responsive adjustments */
 @media (max-width: 768px) {
-  .col-md-0 {
-    flex: 0 0 40%; /* Adjust column width for smaller screens */
+  form>div {
+    flex: 0 0 100%;
+    /* Full width on smaller screens */
   }
 }

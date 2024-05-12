@@ -8,7 +8,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Create Agent</title>
+  <title>Create Agent Details</title>
   <link rel="stylesheet" href="{% static 'css/agent/agent.css' %}">
   <!--    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">-->
 </head>
@@ -19,23 +19,31 @@
     <h3>Add Agent</h3>
     <form method="post">
       {% csrf_token %}
-      <div class="col-md-4">
+      <div>
         <label for="{{ form.first_name.id_for_label }}">First Name</label>
         {{ form.first_name }}
+      </div>
+      <div>
         <label for="{{ form.last_name.id_for_label }}">Last Name</label>
         {{ form.last_name }}
+      </div>
+      <div>
         <label for="{{ form.email.id_for_label }}">Email</label>
         {{ form.email }}
       </div>
-      <div class="col-md-4">
+      <div>
         <label for="{{ form.phone_number.id_for_label }}">Phone Number</label>
         {{ form.phone_number }}
+      </div>
+      <div>
         <label for="{{ form.whatsapp_number.id_for_label }}">Whatsapp Number</label>
         {{ form.whatsapp_number }}
+      </div>
+      <div>
         <label for="{{ form.address.id_for_label }}">Address</label>
         {{ form.address }}
       </div>
-      <div class="col-md-4">
+      <div>
         <button type="submit" class="btn btn-primary">Create Agent</button>
       </div>
     </form>
