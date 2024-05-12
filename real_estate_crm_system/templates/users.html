@@ -1,44 +1,76 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-
 <head>
-  <title>User List</title>
-  <link rel="stylesheet" href="{% static 'css/user_list.css' %}">
-</head>
+    <link href="https://unpkg.com/tabulator-tables@6.2.1/dist/css/tabulator_modern.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/login_signup/login.css' %}">
+    <link rel="stylesheet" href="{% static 'css/users.css' %}">
 
-<body>
-  <h3>User List</h3>
-  <div class="table-dark">
-    <div class="card body">
-      <div class="table-responsive table-scroll" data-mdb-perfect-scrollbar="true"
-        style="position: relative; height: 85vh;">
-        <table class="table table-hover">
-          <thead class="table-dark">
-            <tr>
-              <th scope="col">First Name</th>
-              <th scope="col">Last Name</th>
-              <th scope="col">User Name</th>
-              <th scope="col">Project Name</th>
-              <th scope="col">Fields</th>
-            </tr>
-          </thead>
-          <tbody>
-            {% if users %}
-            {% for user in users %}
-            <tr>
-              <td>{{ user.first_name }}</td>
-              <td>{{ user.last_name }}</td>
-              <td>{{ user.username }}</td>
-              <td>{{ user.project_name }}</td>
-              <td>{{ user.fields }}</td>
-            </tr>
-            {% endfor %}
-            {% endif %}
-          </tbody>
-        </table>
-      </div>
+    
+    <title>User List</title>
+
+</head>
+<script type="text/javascript" src="https://unpkg.com/tabulator-tables@6.2.1/dist/js/tabulator.min.js"></script>
+<!-- <script type="text/javascript" src="https://unpkg.com/tabulator-tables/dist/js/tabulator.min.js"></script> -->
+
+<div class="tabulator-table">
+    {% if user.is_authenticated %}
+    <div id="search-bar">
+        <label for="name-input">Name</label>
+        <input type="text" id="name-input" placeholder="Search...">
+        <label for="username-input">Inquiry Type</label>
+        <input type="text" id="username-input" placeholder="Search...">
+
     </div>
-  </div>
-</body>
+    <div id="tabulator-container" class="custom-tabulator">
+        <script>
+            var usertableData = [
+                {% for user in users %}
+                    {
+                        id:"{{user.id}}",
+                        createdate:"{{user.date_joined}}",
+                        username:"{{user.username}}",
+                        password:"{{user.password}}",
+                        firstname:"{{user.first_name}}",
+                        lastname:"{{user.last_name}}",
+                        // mobile_number:"{{agent.phone_number}}",
+                        // whatsapp_mobile_number:"{{agent.whatsapp_number}}",
+                        email_id:"{{user.email}}",
+                        last_login:"{{user.last_login}}",
+                        // address:"{{agent.address}}",
+                    },
+                {% endfor %}
+            ];
+
+            var table = new Tabulator("#tabulator-container", {
+                data: usertableData,
+                layout: "fitColumns",
+                pagination: "local",
+                frozenRows:0,
+                frozenColumns:3,
+                movableColumns:true,
+                paginationSize: 50,
+                columns: [
+                    {title:"ID",field:"id", width:100,frozen:true},
+                    {title:"Created Date",field:"createdate", width:150,frozen:true},
+                    {title:"User Name",field:"username",width:150},
+                    {title:"Password",field:"password",width:150},
+                    {title:"First Name",field:"firstname",width:150},
+                    {title:"Last Name",field:"lastname",width:150},
+                    {title:"Email Id",field:"email_id",width:150},
+                    {title:"Last Login",field:"last_login",width:150},    
+                ],
+            });
+            
+
+        </script>
+    </div>
+    {% else %}
+    {% include 'login.html' %}
+
+    {% endif %}
+</div>
+
 {% endblock %}
+
+

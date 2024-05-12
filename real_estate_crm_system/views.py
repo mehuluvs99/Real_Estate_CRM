@@ -76,6 +76,7 @@ def signup(request):
 
 def user_list(request):
     users = User.objects.all()
+    # print(users)
     return render(request, 'users.html', {'users': users})
 
 
