@@ -6,7 +6,7 @@ body {
 }
 
 .add_inquiry-container {
-  max-width: 800px;
+  max-width: 1000px;
   margin: 70px auto;
   padding: 20px;
   background-color: #f9f9f9;
@@ -26,7 +26,7 @@ form {
 }
 
 form > div {
-  flex: 0 0 50%; /* Two columns per row */
+  flex: 10 0 30%; /* Two columns per row */
   padding: 10px;
   box-sizing: border-box;
 }
@@ -39,6 +39,7 @@ label {
 
 input[type="text"],
 input[type="email"],
+input[type="datetime-local"],
 select,
 textarea {
   width: 100%;
@@ -60,7 +61,7 @@ button {
   background-color: #007bff;
   color: #fff;
   cursor: pointer;
-  width: 205%;
+  width: 100%;
 }
 
 button:hover {

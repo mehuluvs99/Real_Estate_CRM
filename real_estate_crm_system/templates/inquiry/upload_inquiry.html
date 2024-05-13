@@ -4,8 +4,10 @@
 
 <head>
     <link rel="stylesheet" href="{% static 'css/inquiry/upload_inquiry.css' %}">
+    <link rel="stylesheet" href="{% static 'css/login_signup/login.css' %}">
 
 </head>
+{% if user.is_authenticated %}
 <div class="upload-inquiry-container">
     <form method="post" enctype="multipart/form-data" id="upload-form">
         {% csrf_token %}
@@ -49,5 +51,8 @@
         xhr.send(formData);
     });
 </script>
+{% else %}
+{% include 'login_signup/login.html' %}
+{% endif %}
 
 {% endblock %}

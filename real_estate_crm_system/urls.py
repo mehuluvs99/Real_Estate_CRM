@@ -18,6 +18,7 @@ urlpatterns = [
     # path('delete_project/<int:project_id>/', views.delete_project, name='delete_project'),
     # path('project/update/<int:project_id>/', views.update_project, name='update_project'),
     path('delete/<str:object_type>/<int:object_id>/', views.delete_object, name='delete_object'),
+    path('download/', views.download_xlsx, name='download_xlsx'),
 
 
     # path('projects/', views.project_list, name='project_list'),

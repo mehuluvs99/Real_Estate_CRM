@@ -8,6 +8,7 @@
 
 </head>
 <script type="text/javascript" src="https://unpkg.com/tabulator-tables@6.2.1/dist/js/tabulator.min.js"></script>
+<script type="text/javascript" src="https://oss.sheetjs.com/sheetjs/xlsx.full.min.js"></script>
 <!-- <script type="text/javascript" src="https://unpkg.com/tabulator-tables/dist/js/tabulator.min.js"></script> -->
 
 <div class="tabulator-table">
@@ -23,6 +24,8 @@
         <input type="text" id="assign_to-input" placeholder="Search...">
         <label for="interested_project-input">Interested Project</label>
         <input type="text" id="interested_project-input" placeholder="Search...">
+        <a class="download-xlsx" href="{% url 'download_xlsx' %}">Download XLSX</a>
+
     </div>
     <div id="tabulator-container" class="custom-tabulator">
         <script>
@@ -70,15 +73,24 @@
                 frozenColumns:3,
                 movableColumns:true,
                 paginationSize: 50,
+                // responsiveLayout: true, // Set responsiveLayout to "collapse"
+                // rowHeader: {
+                //     formatter: "responsiveCollapse",
+                //     width: 30,
+                //     minWidth: 30,
+                //     hozAlign: "center",
+                //     resizable: false,
+                //     headerSort: false
+                // },
                 columns: [
                     {title:"ID",field:"id", width:100,frozen:true},
                     {title:"Created Date",field:"created_date",width:150,frozen:true},
-                    {title:"First Name",field:"first_name",width:150,frozen:true},
-                    {title:"Middle Name",field:"middle_name",width:120},
-                    {title:"Last Name",field:"last_name",width:150},
-                    {title:"Mobile No.",field:"mobile_number",width:120},
-                    {title:"WA Mobile No.",field:"whatsapp_mobile_number",width:120},
-                    {title:"Email Id",field:"email_id",width:150},
+                    {title:"Full Name",field:"first_name",formatter:fullname,width:150,frozen:true},
+                    // {title:"Middle Name",field:"middle_name",width:120},
+                    // {title:"Last Name",field:"last_name",width:150},
+                    {title:"Mobile No",field:"mobile_number",width:120},
+                    {title:"WA Mobile No",field:"whatsapp_mobile_number",width:120},
+                    {title:"Email ID",field:"email_id",width:150},
                     {title:"Address",field:"address",width:200},
                     {title:"Area",field:"area",width:120},
                     {title:"City",field:"city",width:120},
@@ -87,23 +99,42 @@
                     {title:"Inquiry Type",field:"inquiry_type",width:120, formatter: type},
                     {title:"Inquiry Stage",field:"inquiry_stage",width:120, formatter:stage},
                     {title:"Interested Project",field:"interested_project",width:150},
-                    {title:"Selected Unit",field:"selected_unit",width:120},
-                    {title:"Follow Up Date",field:"follow_up_date",width:150},
+                    {title:"Selected Unit",field:"selected_unit",width:120,formatter:nullvalue},
+                    {title:"Follow Up Date",field:"follow_up_date",width:150,formatter:nullvalue},
                     {title:"Remarks",field:"remarks",width:250},
-                    {title:"Next Follow Up Date",field:"next_follow_up_date",width:150},
-                    {title:"Converted Date",field:"converted_date",width:150},
+                    {title:"Next Follow Up Date",field:"next_follow_up_date",width:150,formatter:nullvalue},
+                    {title:"Converted Date",field:"converted_date",width:150,formatter:nullvalue},
                     {title:"Assign To",field:"assign_to",width:120},
                     {title:"Fields",field:"fields",width:120},
                 ],
             });
 
+            // document.getElementById("download-xlsx").addEventListener("click", function(){
 
+            //     table.download("xlsx", "inquirydata.xlsx", {sheetName:"Inquiry Data"});
+            // });
 
+            function fullname(cell) {
+                var first_name = cell.getData()["first_name"];
+                var middle_name = cell.getData()["middle_name"];
+                var last_name =  cell.getData()["last_name"]; // Retrieve the value of 'selected_unit' from the row data
+                
+                return [first_name,middle_name,last_name].join(" ")
+            }
+
+            function nullvalue(cell) {
+                var data = cell.getData()["selected_unit"]; // Retrieve the value of 'selected_unit' from the row data
+                if (data === "None") {
+                    return ""; // If the value is "None", display an empty string in the cell
+                } else {
+                    return data; // Otherwise, display the actual value in the cell
+                }
+            }
 
             function stage(cell) {
                 var data = cell.getRow().getData();
                 var stage = data['inquiry_stage'];
-                console.log(stage);
+                // console.log(stage);
                 if (stage === "Converted") {
                     // Apply background color to the row
                     var rowElement = cell.getRow().getElement();
@@ -139,7 +170,7 @@
             var interestedProjectInput = document.getElementById('interested_project-input');
 
             function filterTable() {
-                console.log("Filtering...");
+                // console.log("Filtering...");
                 var nameValue = nameInput.value.toLowerCase();
                 var inquiryTypeValue = inquiryTypeInput.value.toLowerCase();
                 var inquiryStageValue = inquiryStageInput.value.toLowerCase();

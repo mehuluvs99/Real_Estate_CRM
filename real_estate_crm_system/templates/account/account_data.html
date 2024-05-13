@@ -56,6 +56,8 @@
                 {% endfor %}
             ];
 
+            console.log(tableData);
+
             var table = new Tabulator("#tabulator-container", {
                 data: tableData,
                 layout: "fitColumns",
@@ -109,7 +111,7 @@
                         }
                     },
                     {title:"Interested Project",field:"interested_project",width:150},
-                    {title:"Selected Unit",field:"selected_unit",width:120},
+                    {title:"Selected Unit",field:"selected_unit",width:120,formatter:nullvalue},
                     {title:"Follow Up Date",field:"follow_up_date",width:150},
                     {title:"Remarks",field:"remarks",width:250},
                     {title:"Next Follow Up Date",field:"next_follow_up_date",width:150},
@@ -118,6 +120,14 @@
                     {title:"Fields",field:"fields",width:120},
                 ],
             });
+            function nullvalue(cell) {
+                var data = cell.getData()["selected_unit"]; // Retrieve the value of 'selected_unit' from the row data
+                if (data === "None") {
+                    return ""; // If the value is "None", display an empty string in the cell
+                } else {
+                    return data; // Otherwise, display the actual value in the cell
+                }
+            }
             
 
             var nameInput = document.getElementById('name-input');
@@ -127,7 +137,7 @@
             var interestedProjectInput = document.getElementById('interested_project-input');
 
             function filterTable() {
-                console.log("Filtering...");
+                // console.log("Filtering...");
                 var nameValue = nameInput.value.toLowerCase();
                 var inquiryTypeValue = inquiryTypeInput.value.toLowerCase();
                 var inquiryStageValue = inquiryStageInput.value.toLowerCase();
@@ -150,6 +160,7 @@
                 table.redraw(); 
             }
 
+
             nameInput.addEventListener('input', filterTable);
             inquiryTypeInput.addEventListener('input', filterTable);
             inquiryStageInput.addEventListener('input', filterTable);
@@ -159,8 +170,7 @@
         </script>
     </div>
     {% else %}
-    {% include 'login.html' %}
-
+    {% include 'login_signup/login.html' %}
     {% endif %}
 </div>
 

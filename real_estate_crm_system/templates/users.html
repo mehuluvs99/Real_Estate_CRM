@@ -1,12 +1,13 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
+
 <head>
     <link href="https://unpkg.com/tabulator-tables@6.2.1/dist/css/tabulator_modern.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'css/login_signup/login.css' %}">
     <link rel="stylesheet" href="{% static 'css/users.css' %}">
 
-    
+
     <title>User List</title>
 
 </head>
@@ -26,42 +27,52 @@
         <script>
             var usertableData = [
                 {% for user in users %}
-                    {
-                        id:"{{user.id}}",
-                        createdate:"{{user.date_joined}}",
-                        username:"{{user.username}}",
-                        password:"{{user.password}}",
-                        firstname:"{{user.first_name}}",
-                        lastname:"{{user.last_name}}",
-                        // mobile_number:"{{agent.phone_number}}",
-                        // whatsapp_mobile_number:"{{agent.whatsapp_number}}",
-                        email_id:"{{user.email}}",
-                        last_login:"{{user.last_login}}",
+            {
+                id: "{{user.id}}",
+                    createdate: "{{user.date_joined}}",
+                        username: "{{user.username}}",
+                            password: "{{user.password}}",
+                                firstname: "{{user.first_name}}",
+                                    lastname: "{{user.last_name}}",
+                                        // mobile_number:"{{agent.phone_number}}",
+                                        // whatsapp_mobile_number:"{{agent.whatsapp_number}}",
+                                        email_id: "{{user.email}}",
+                                            last_login: "{{user.last_login}}",
                         // address:"{{agent.address}}",
                     },
-                {% endfor %}
+            {% endfor %}
             ];
 
             var table = new Tabulator("#tabulator-container", {
                 data: usertableData,
                 layout: "fitColumns",
                 pagination: "local",
-                frozenRows:0,
-                frozenColumns:3,
-                movableColumns:true,
+                frozenRows: 0,
+                frozenColumns: 3,
+                movableColumns: true,
                 paginationSize: 50,
+                responsiveLayout: "collapse", // Set responsiveLayout to "collapse"
+                rowHeader: {
+                    formatter: "responsiveCollapse",
+                    width: 30,
+                    minWidth: 30,
+                    hozAlign: "center",
+                    resizable: false,
+                    headerSort: false
+                },
                 columns: [
-                    {title:"ID",field:"id", width:100,frozen:true},
-                    {title:"Created Date",field:"createdate", width:150,frozen:true},
-                    {title:"User Name",field:"username",width:150},
-                    {title:"Password",field:"password",width:150},
-                    {title:"First Name",field:"firstname",width:150},
-                    {title:"Last Name",field:"lastname",width:150},
-                    {title:"Email Id",field:"email_id",width:150},
-                    {title:"Last Login",field:"last_login",width:150},    
+                    { title: "ID", field: "id", width: 100, frozen: true },
+                    { title: "Created Date", field: "createdate", width: 150, frozen: true },
+                    { title: "User Name", field: "username", width: 150 },
+                    { title: "Password", field: "password", width: 150 },
+                    { title: "First Name", field: "firstname", width: 150 },
+                    { title: "Last Name", field: "lastname", width: 150 },
+                    { title: "Email Id", field: "email_id", width: 150 },
+                    { title: "Last Login", field: "last_login", width: 150 },
                 ],
             });
-            
+
+
 
         </script>
     </div>
@@ -72,5 +83,3 @@
 </div>
 
 {% endblock %}
-
-

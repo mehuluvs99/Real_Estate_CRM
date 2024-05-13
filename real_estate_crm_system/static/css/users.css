@@ -40,7 +40,7 @@ body, html {
   }
   
   #tabulator-container.custom-tabulator {
-    font-size: 10px;
+    font-size: 12px;
     margin: 10px auto; /* Adjust this value based on the height of your navbar */
     overflow-y:  5px auto; /* Allow vertical scrolling */
     max-height: calc(100vh - 40px - 90px); /* Subtract the height of the navbar and search bar from the viewport height */

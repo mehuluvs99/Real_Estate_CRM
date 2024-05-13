@@ -8,6 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Add Inquiry</title>
   <link rel="stylesheet" href="{% static 'css/inquiry/add_inquiry_form.css' %}">
+  <link rel="stylesheet" href="{% static 'css/login_signup/login.css' %}">
 </head>
 <body>
   {% if user.is_authenticated %}
@@ -78,7 +79,7 @@
       </div>
       <div>
         <label for="{{ form.converted_date.id_for_label }}">Converted Date</label>
-        {{ form.converted_date }}
+        <input type="datetime-local" id="{{ form.converted_date.id }}" name="{{ form.converted_date.name }}">
       </div>
       <div>
         <label for="{{ form.assign_to.id_for_label }}">Assign To</label>

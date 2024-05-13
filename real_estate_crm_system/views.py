@@ -2,6 +2,8 @@ import csv
 import pandas as pd
 import openpyxl
 from datetime import datetime
+import xlsxwriter
+from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from .forms import SignUpForm, AddInquiryForm, AccountsForm, PaymentForm, AgentForm, ProjectForm, FieldForm, Inquiry_TypeForm, Inquiry_StageForm, Selected_UnitForm, Assign_ToForm, Payment_TermsForm, \
     Payment_TypeForm
@@ -11,9 +13,6 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.views import View
-from django.shortcuts import render
-import matplotlib.pyplot as plt
-import mpld3
 
 
 def home(request):
@@ -145,6 +144,7 @@ def agent(request):
 
     return render(request, 'agent/agent.html', {'form': form})
 
+
 def agent_data(request):
     agent_records = Agents.objects.all()
     print(agent_records)
@@ -162,7 +162,6 @@ def agent_data(request):
             return redirect('home')
     else:
         return render(request, 'agent/agent_data.html', {'agent_records': agent_records})
-
 
 
 def upload_inquiry_file(request):
@@ -383,6 +382,36 @@ def upload_account_file(request):
     return render(request, 'account/upload_account.html')
 
 
+def download_xlsx(request):
+    # Fetch data from MySQL
+    queryset = Add_Inquiry.objects.all()
+
+    # Convert queryset to a pandas DataFrame
+    data = pd.DataFrame(list(queryset.values()))
+
+    # Ensure datetime columns are timezone unaware
+    date_columns = ['created_date']  # Adjust with your datetime column names
+    for col in date_columns:
+        if col in data.columns:
+            data[col] = data[col].dt.tz_localize(None)  # Convert to timezone-unaware
+
+    # Create a BytesIO buffer to write the Excel file
+    # buffer = pd.ExcelWriter('data.xlsx', engine='xlsxwriter')
+    date_time = datetime.now().strftime('%Y%m%d_%H%M%S')  # Format: YYYYMMDD_HHMMSS
+    file_name = f"InquiryData_{date_time}.xlsx"
+    data.to_excel(file_name, index=False,engine="openpyxl")
+
+    # Save the ExcelWriter object to a file
+    # buffer.save()
+
+    # Open the saved file for reading
+    file_path = file_name
+    with open(file_path, 'rb') as excel:
+        # Prepare response with appropriate content type
+        response = HttpResponse(excel.read(), content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+        response['Content-Disposition'] = f'attachment; filename="{file_name}"'
+        return response
+
 class ManageModelsView(View):
     def get(self, request):
         # Initialize all forms
@@ -497,11 +526,6 @@ def delete_object(request, object_type, object_id):
 
     # If the request is not a POST (e.g., GET request), render a confirmation template
     return render(request, 'confirm_delete.html', {'object': obj, 'object_type': object_type})
-
-
-# def project_list(request):
-#     projects = Project_Name.objects.all()
-#     return render(request, 'project_list.html', {'projects': projects})
 
 
 def update_project(request, project_id):

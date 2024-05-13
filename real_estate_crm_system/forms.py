@@ -51,16 +51,13 @@ class AddInquiryForm(forms.ModelForm):
             'city': forms.TextInput(attrs={'class': 'form-control form-control-lg', 'placeholder': 'City'}),
             'state': forms.TextInput(attrs={'class': 'form-control form-control-lg', 'placeholder': 'State'}),
             'country': forms.TextInput(attrs={'class': 'form-control form-control-lg', 'placeholder': 'Country'}),
-            'follow_up_data': forms.DateTimeInput(
-                attrs={'class': 'form-control form-control-lg', 'placeholder': 'Converted Date'},
-                format='%d-%m-%Y HH:MM:SS'),
+            'follow_up_data': forms.TextInput(
+                attrs={'class': 'form-control form-control-lg', 'placeholder': 'Converted Date'}),
             'remarks': forms.Textarea(attrs={'class': 'form-control form-control-lg', 'placeholder': 'Remarks'}),
-            'next_follow_up_data': forms.DateTimeInput(
-                attrs={'class': 'form-control form-control-lg', 'placeholder': 'Converted Date'},
-                format='%d-%m-%Y HH:MM:SS'),
-            'converted_date': forms.DateTimeInput(
-                attrs={'class': 'form-control form-control-lg', 'placeholder': 'Converted Date'},
-                format='%d-%m-%Y HH:MM:SS'),
+            'next_follow_up_data': forms.TextInput(
+                attrs={'class': 'form-control form-control-lg', 'placeholder': 'Converted Date'}),
+            'converted_date': forms.TextInput(
+                attrs={'class': 'form-control form-control-lg', 'placeholder': 'Converted Date'}),
             'unique_key': forms.TextInput(attrs={'class': 'form-control form-control-lg', 'readonly': 'readonly'}),
             'inquiry_type': forms.Select(attrs={'class': 'form-control form-control-lg'}),
             'inquiry_stage': forms.Select(attrs={'class': 'form-control form-control-lg'}),
