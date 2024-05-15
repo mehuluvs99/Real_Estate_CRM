@@ -1,12 +1,14 @@
 import csv
+from numpy import true_divide
 import pandas as pd
 import openpyxl
 from datetime import datetime
 import xlsxwriter
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
+from django.template.loader import render_to_string
 from django.shortcuts import render, redirect, get_object_or_404
 from .forms import SignUpForm, AddInquiryForm, AccountsForm, PaymentForm, AgentForm, ProjectForm, FieldForm, Inquiry_TypeForm, Inquiry_StageForm, Selected_UnitForm, Assign_ToForm, Payment_TermsForm, \
-    Payment_TypeForm
+    Payment_TypeForm, FollowUpUpdateForm
 from .models import Project_Name, Fields, Inquiry_Type, Inquiry_Stage, Selected_Unit, Assign_To, Payment_Terms, \
     Payment_Type, Add_Inquiry, Accounts, Payment, Agents
 from django.contrib import messages
@@ -543,3 +545,21 @@ def update_project(request, project_id):
     else:
         # If it's a GET request, pre-fill the form with the existing project data
         form = ProjectForm(instance=project)
+
+
+def updatefollowupremark(request, pk):
+    if request.user.is_authenticated:
+        current_record = Add_Inquiry.objects.get(id=pk)
+        follow_up_form = FollowUpUpdateForm(request.POST or None, instance=current_record)
+        
+        if request.method == 'POST' and follow_up_form.is_valid():
+            follow_up_form.save()
+            return JsonResponse({'success': True})
+        
+        if request.is_ajax():
+            html = render_to_string('follow_up_form.html', {'follow_up_form': follow_up_form})
+            return JsonResponse({'html': html})
+
+        return render(request, 'home.html', {'follow_up_form': follow_up_form})
+    else:
+        return JsonResponse({'success': False, 'error': 'User not authenticated'})

@@ -1,25 +1,50 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Real Estate CRM</title>
-    {% load static %}
-  </head>
-  <body>
-    {% include 'navbar.html' %}
-    <div class="container">
-      {% if messages %}
-        {% for message in messages %}
-            <div class="alert alert-warning alert-dismissible fade show" role="alert">
-               {{ message }}
-              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-        {% endfor %}
-      {% endif %}
-      {% block content %}
-      {% endblock %}
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Real Estate CRM</title>
+  {% load static %}
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script type="text/javascript">
+    var csrftoken = '{{ csrf_token }}';
+    $.ajaxSetup({
+        headers: {
+            "X-CSRFToken": csrftoken
+        }
+    });
+  </script>
+</head>
+
+<body>
+  {% include 'navbar.html' %}
+  <div class="container">
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+      {{ message }}
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">Close</button>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-  </body>
+    {% endfor %}
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        var alertElements = document.querySelectorAll('.alert');
+        alertElements.forEach(function (alert) {
+          var alertTimeout = setTimeout(function () {
+            alert.classList.add('fade');
+            alert.classList.remove('show');
+            clearTimeout(alertTimeout);
+          }, 100);  
+        });
+      });
+    </script>
+    {% endif %}
+
+    {% block content %}
+    {% endblock %}
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
 </html>

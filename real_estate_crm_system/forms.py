@@ -2,7 +2,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django import forms
 from .models import Project_Name, Fields, Inquiry_Type, Inquiry_Stage, Selected_Unit, Assign_To, Payment_Terms, \
-    Payment_Type, Add_Inquiry, Accounts, Payment, Agents
+    Payment_Type, Add_Inquiry, Accounts, Payment, Agents, FollowUpUpdate
 
 
 class SignUpForm(UserCreationForm):
@@ -176,3 +176,20 @@ class Payment_TypeForm(forms.ModelForm):
     class Meta:
         model = Payment_Type
         fields = ['payment_type']
+
+
+class FollowUpUpdateForm(forms.ModelForm):
+    class Meta:
+        model = FollowUpUpdate
+        fields = '__all__'
+        widgets = {
+            "follow_up_date": forms.TextInput(attrs={'class': 'form-control form-control-lg'}),
+            "inquiry_type": forms.TextInput(attrs={'class': 'form-control form-control-lg'}),
+            "inquiry_stage": forms.TextInput(attrs={'class': 'form-control form-control-lg'}),
+            "inquiry_stage": forms.TextInput(attrs={'class': 'form-control form-control-lg'}),
+            "next_follow_up_date": forms.TextInput(attrs={'class': 'form-control form-control-lg'}),
+            "converted_date": forms.TextInput(attrs={'class': 'form-control form-control-lg'}),
+            "assign_to": forms.TextInput(attrs={'class': 'form-control form-control-lg'}),
+            "selected_unit": forms.TextInput(attrs={'class': 'form-control form-control-lg'}),
+            "interested_project": forms.TextInput(attrs={'class': 'form-control form-control-lg'}),
+        }        

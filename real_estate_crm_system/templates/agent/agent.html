@@ -6,18 +6,17 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Create Agent Details</title>
   <link rel="stylesheet" href="{% static 'css/agent/agent.css' %}">
   <link rel="stylesheet" href="{% static 'css/login_signup/login.css' %}">
-  <!--    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">-->
 </head>
 
 <body>
-  {% if user.is_authenticated %}
+  
   <div class="agent-container">
+    {% if user.is_authenticated %}
     <h3>Add Agent</h3>
+    
     <form method="post">
       {% csrf_token %}
       <div>
@@ -48,10 +47,13 @@
         <button type="submit" class="btn btn-primary">Create Agent</button>
       </div>
     </form>
+    {% else %}
+    {% include 'login_signup/login.html' %}
+    {% endif %}
   </div>
-  {% else %}
-  {% include 'login_signup/login.html' %}
-  {% endif %}
+  
+
+  
 </body>
 
 </html>

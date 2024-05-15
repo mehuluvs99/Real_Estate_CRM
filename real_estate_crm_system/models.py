@@ -143,4 +143,17 @@ class Agents(models.Model):
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
 
+class FollowUpUpdate(models.Model):
+    created_date = models.DateTimeField(auto_now_add=True)
+    inquiry_type = models.ForeignKey(Inquiry_Type, on_delete=models.CASCADE,blank=True,null=True)
+    inquiry_stage = models.ForeignKey(Inquiry_Stage, on_delete=models.CASCADE,blank=True,null=True)
+    interested_project = models.ForeignKey(Project_Name, on_delete=models.CASCADE,blank=True,null=True)
+    selected_unit = models.ForeignKey(Selected_Unit, on_delete=models.CASCADE,blank=True,null=True)
+    follow_up_date = models.CharField(max_length=50, blank=True, null=True)
+    remarks = models.TextField(max_length=200, blank=True, null=True)
+    next_follow_up_date = models.CharField(max_length=50, blank=True, null=True)
+    converted_date = models.CharField(max_length=50, blank=True, null=True)
+    assign_to = models.ForeignKey(Assign_To, on_delete=models.CASCADE,blank=True,null=True)
 
+    def __str__(self):
+        return f"{self.created_date} {self.remarks}"

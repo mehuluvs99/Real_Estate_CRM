@@ -1,15 +1,16 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
+
 <head>
     <link href="https://unpkg.com/tabulator-tables@6.2.1/dist/css/tabulator_modern.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'css/login_signup/login.css' %}">
     <link rel="stylesheet" href="{% static 'css/inquiry/home_table.css' %}">
+    <!-- <link rel="stylesheet" href="{% static 'css/search.css' %}"> -->
+
 
 </head>
 <script type="text/javascript" src="https://unpkg.com/tabulator-tables@6.2.1/dist/js/tabulator.min.js"></script>
-<script type="text/javascript" src="https://oss.sheetjs.com/sheetjs/xlsx.full.min.js"></script>
-<!-- <script type="text/javascript" src="https://unpkg.com/tabulator-tables/dist/js/tabulator.min.js"></script> -->
 
 <div class="tabulator-table">
     {% if user.is_authenticated %}
@@ -30,127 +31,110 @@
     <div id="tabulator-container" class="custom-tabulator">
         <script>
             var tableData = [
-                {% for record in records %}
-                    {
-                        id:"{{record.id}}",
-                        created_date:"{{record.created_date}}",
-                        first_name:"{{record.first_name}}",
-                        middle_name:"{{record.middle_name}}",
-                        last_name:"{{record.last_name}}",
-                        mobile_number:"{{record.mobile_number}}",
-                        whatsapp_mobile_number:"{{record.whatsapp_mobile_number}}",
-                        email_id:"{{record.email_id}}",
-                        address:"{{record.address}}",
-                        area:"{{record.area}}",
-                        city:"{{record.city}}",
-                        state:"{{record.state}}",
-                        country:"{{record.country}}",
-                        inquiry_type:"{{record.inquiry_type}}",
-                        inquiry_stage:"{{record.inquiry_stage}}",
-                        interested_project:"{{record.interested_project}}",
-                        selected_unit:"{{record.selected_unit}}",
-                        follow_up_date :"{{record.follow_up_date}}",
-                        remarks:"{{record.remarks}}",
-                        next_follow_up_date:"{{record.next_follow_up_date}}",
-                        converted_date:"{{record.converted_date}}",
-                        assign_to:"{{record.assign_to}}",
-                        fields:"{{record.fields}}",
-                    },
-                {% endfor %}
+            {% for record in records %}
+            {
+                id: "{{record.id}}",
+                created_date: "{{record.created_date}}",
+                first_name: "{{record.first_name}}",
+                middle_name: "{{record.middle_name}}",
+                last_name: "{{record.last_name}}",
+                mobile_number: "{{record.mobile_number}}",
+                whatsapp_mobile_number: "{{record.whatsapp_mobile_number}}",
+                email_id: "{{record.email_id}}",
+                address: "{{record.address}}",
+                area: "{{record.area}}",
+                city: "{{record.city}}",
+                state: "{{record.state}}",
+                country: "{{record.country}}",
+                inquiry_type: "{{record.inquiry_type}}",
+                inquiry_stage: "{{record.inquiry_stage}}",
+                interested_project: "{{record.interested_project}}",
+                selected_unit: "{{record.selected_unit}}",
+                follow_up_date : "{{record.follow_up_date}}",
+                remarks: "{{record.remarks}}",
+                next_follow_up_date: "{{record.next_follow_up_date}}",
+                converted_date: "{{record.converted_date}}",
+                assign_to: "{{record.assign_to}}",
+                fields: "{{record.fields}}",
+            },
+            {% endfor %}
             ];
 
             var table = new Tabulator("#tabulator-container", {
                 data: tableData,
                 layout: "fitColumns",
                 pagination: "local",
-                rowMouseEnter: function(e, row) {
+                rowMouseEnter: function (e, row) {
                     row.getElement().style.backgroundColor = "#f0f0f0"; // Change background color on hover
                 },
-                rowMouseLeave: function(e, row) {
+                rowMouseLeave: function (e, row) {
                     row.getElement().style.backgroundColor = ""; // Revert to default background color on mouse leave
                 },
-                frozenRows:0,
-                frozenColumns:3,
-                movableColumns:true,
+                frozenRows: 0,
+                frozenColumns: 3,
+                movableColumns: true,
                 paginationSize: 50,
-                // responsiveLayout: true, // Set responsiveLayout to "collapse"
-                // rowHeader: {
-                //     formatter: "responsiveCollapse",
-                //     width: 30,
-                //     minWidth: 30,
-                //     hozAlign: "center",
-                //     resizable: false,
-                //     headerSort: false
-                // },
                 columns: [
-                    {title:"ID",field:"id", width:100,frozen:true},
-                    {title:"Created Date",field:"created_date",width:150,frozen:true},
-                    {title:"Full Name",field:"first_name",formatter:fullname,width:150,frozen:true},
-                    // {title:"Middle Name",field:"middle_name",width:120},
-                    // {title:"Last Name",field:"last_name",width:150},
-                    {title:"Mobile No",field:"mobile_number",width:120},
-                    {title:"WA Mobile No",field:"whatsapp_mobile_number",width:120},
-                    {title:"Email ID",field:"email_id",width:150},
-                    {title:"Address",field:"address",width:200},
-                    {title:"Area",field:"area",width:120},
-                    {title:"City",field:"city",width:120},
-                    {title:"State",field:"state",width:120},
-                    {title:"Country",field:"country",width:120},
-                    {title:"Inquiry Type",field:"inquiry_type",width:120, formatter: type},
-                    {title:"Inquiry Stage",field:"inquiry_stage",width:120, formatter:stage},
-                    {title:"Interested Project",field:"interested_project",width:150},
-                    {title:"Selected Unit",field:"selected_unit",width:120,formatter:nullvalue},
-                    {title:"Follow Up Date",field:"follow_up_date",width:150,formatter:nullvalue},
-                    {title:"Remarks",field:"remarks",width:250},
-                    {title:"Next Follow Up Date",field:"next_follow_up_date",width:150,formatter:nullvalue},
-                    {title:"Converted Date",field:"converted_date",width:150,formatter:nullvalue},
-                    {title:"Assign To",field:"assign_to",width:120},
-                    {title:"Fields",field:"fields",width:120},
+                    { title: "ID", field: "id", width: 100, frozen: true},
+                    { title: "Created Date", field: "created_date", width: 150, frozen: true },
+                    { title: "Full Name", field: "first_name", formatter: fullname, width: 150, frozen: true },
+                    { title: "Mobile No", field: "mobile_number", width: 120 },
+                    { title: "WA Mobile No", field: "whatsapp_mobile_number", width: 120 },
+                    { title: "Email ID", field: "email_id", width: 150 },
+                    { title: "Address", field: "address", width: 200 },
+                    { title: "Area", field: "area", width: 120 },
+                    { title: "City", field: "city", width: 120 },
+                    { title: "State", field: "state", width: 120 },
+                    { title: "Country", field: "country", width: 120 },
+                    { title: "Inquiry Type", field: "inquiry_type", width: 110, formatter: type },
+                    { title: "Inquiry Stage", field: "inquiry_stage", width: 120, formatter: stage },
+                    { title: "Interested Project", field: "interested_project", width: 150 },
+                    { title: "Selected Unit", field: "selected_unit", width: 110, formatter: nullvalue },
+                    { title: "Follow Up Date", field: "follow_up_date", width: 150, formatter: nullvalue },
+                    { title: "Remarks", field: "remarks", width: 250 },
+                    { title: "Next Follow Up Date", field: "next_follow_up_date", width: 150, formatter: nullvalue },
+                    { title: "Converted Date", field: "converted_date", width: 150, formatter: nullvalue },
+                    { title: "Assign To", field: "assign_to", width: 120 },
+                    { title: "Fields", field: "fields", width: 120 },
                 ],
             });
 
-            // document.getElementById("download-xlsx").addEventListener("click", function(){
-
-            //     table.download("xlsx", "inquirydata.xlsx", {sheetName:"Inquiry Data"});
-            // });
 
             function fullname(cell) {
                 var first_name = cell.getData()["first_name"];
                 var middle_name = cell.getData()["middle_name"];
-                var last_name =  cell.getData()["last_name"]; // Retrieve the value of 'selected_unit' from the row data
-                
-                return [first_name,middle_name,last_name].join(" ")
+                var last_name = cell.getData()["last_name"]; // Retrieve the value of 'selected_unit' from the row data
+                return [first_name, middle_name, last_name].join(" ")
             }
 
             function nullvalue(cell) {
-                var data = cell.getData()["selected_unit"]; // Retrieve the value of 'selected_unit' from the row data
+                var data = cell.getData()["selected_unit"];
                 if (data === "None") {
-                    return ""; // If the value is "None", display an empty string in the cell
+                    return "";
                 } else {
-                    return data; // Otherwise, display the actual value in the cell
+                    return data;
                 }
             }
 
             function stage(cell) {
                 var data = cell.getRow().getData();
                 var stage = data['inquiry_stage'];
-                // console.log(stage);
                 if (stage === "Converted") {
                     // Apply background color to the row
                     var rowElement = cell.getRow().getElement();
                     rowElement.style.backgroundColor = "#38ff63";
-                    rowElement.style.color = "#000000"; // White font color
+                    rowElement.style.color = "#000000";
                 } else if (stage === "Site Visited") {
                     // Apply background color to the row
                     var rowElement = cell.getRow().getElement();
                     rowElement.style.backgroundColor = "#ffed47";
-                    rowElement.style.color = "#000000"; // White font color
+                    rowElement.style.color = "#000000";
                 }
 
                 return stage;
             }
 
-            function type(cell){
+            function type(cell) {
                 var data = cell.getRow().getData();
                 var type = data['inquiry_type'];
                 if (type === "Cold") {
@@ -159,10 +143,9 @@
                     rowElement.style.backgroundColor = "#ff384c";
                     rowElement.style.color = "#000000"; // White font color
                 }
-
                 return type;
             }
-            
+
             var nameInput = document.getElementById('name-input');
             var inquiryTypeInput = document.getElementById('inquiry_type-input');
             var inquiryStageInput = document.getElementById('inquiry_stage-input');
@@ -170,15 +153,13 @@
             var interestedProjectInput = document.getElementById('interested_project-input');
 
             function filterTable() {
-                // console.log("Filtering...");
                 var nameValue = nameInput.value.toLowerCase();
                 var inquiryTypeValue = inquiryTypeInput.value.toLowerCase();
                 var inquiryStageValue = inquiryStageInput.value.toLowerCase();
                 var assignToValue = assignToInput.value.toLowerCase();
                 var interestedProjectValue = interestedProjectInput.value.toLowerCase();
 
-                table.setFilter(function(data) {
-                    // console.log("data:", data);
+                table.setFilter(function (data) {
                     return (
                         (data.first_name && data.first_name.toLowerCase().includes(nameValue)) ||
                         (data.middle_name && data.middle_name.toLowerCase().includes(nameValue)) ||
@@ -191,7 +172,7 @@
                 });
 
                 table.redraw();
-                
+
             }
 
             nameInput.addEventListener('input', filterTable);
@@ -201,6 +182,8 @@
             interestedProjectInput.addEventListener('input', filterTable);
 
         </script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
     </div>
     {% else %}
     {% include 'login_signup/login.html' %}
@@ -209,5 +192,3 @@
 </div>
 
 {% endblock %}
-
-

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Project_Name, Fields, Inquiry_Type, Inquiry_Stage, Selected_Unit, Assign_To, Payment_Terms, \
+from .models import FollowUpUpdate, Project_Name, Fields, Inquiry_Type, Inquiry_Stage, Selected_Unit, Assign_To, Payment_Terms, \
     Payment_Type, Add_Inquiry, Accounts, Payment, Agents
 
 # Register your models here.
@@ -16,3 +16,4 @@ admin.site.register(Add_Inquiry)
 admin.site.register(Accounts)
 admin.site.register(Payment)
 admin.site.register(Agents)
+admin.site.register(FollowUpUpdate)

@@ -15,14 +15,7 @@ urlpatterns = [
     path('agent/', views.agent, name='agent'),
     path('agent_data/', views.agent_data, name='agent_data'),
     path('manage/', views.ManageModelsView.as_view(), name='manage_models'),
-    # path('delete_project/<int:project_id>/', views.delete_project, name='delete_project'),
-    # path('project/update/<int:project_id>/', views.update_project, name='update_project'),
     path('delete/<str:object_type>/<int:object_id>/', views.delete_object, name='delete_object'),
     path('download/', views.download_xlsx, name='download_xlsx'),
-
-
-    # path('projects/', views.project_list, name='project_list'),
-
-
-
+    path('update_follow/<int:pk>', views.updatefollowupremark, name='update_follow'),
 ]
