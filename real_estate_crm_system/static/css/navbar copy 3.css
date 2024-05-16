@@ -7,8 +7,10 @@
     border-radius: 15px;
     z-index: 1000;
     font-size: 15px;
-    font-family: "Calibri", Arial, sans-serif;
-    padding: 10px 15px; /* Add padding for links */
+    font-family: calibri;
+    margin-top: 5px;
+    margin-bottom: 0;
+    /* overflow: hidden; */
 }
 
 .navbar img {
@@ -22,51 +24,66 @@
     color: #f2f2f2;
     text-align: center;
     text-decoration: none;
-    padding: 10px 15px; /* Add padding for clickable area */
+    /* padding: 10px 15px; */
+    margin-left:25px;
+    margin-right:25px;
     border-radius: 15px;
 }
 
 .navbar a:hover {
     background-color: #0030fa;
     color: #ffffff;
+
 }
 
 /* Dropdown Button Styles */
+.dropdown {
+    float: left;
+    /* overflow: hidden; */
+}
+
 .dropdown .nav-link {
     font-size: 16px;
     border: none;
     outline: none;
     color: white;
+    /* padding: 14px 16px; */
     background-color: inherit;
     font-family: inherit;
+    margin: 0;
+    border-radius:15px;
 }
 
 .dropdown-content {
     display: none;
+    margin-top:45px;
     position: absolute;
-    top: 50px; /* Adjust positioning */
     background-color: #f9f9f9;
-    width: 200px; /* Set a specific width */
+    min-width: 50x;
     z-index: 1;
-    border-radius: 15px;
-    color: white;
-    background-color: #000;
+    border-radius:15px;
+    color:white;
+    background-color:#000;
 }
 
 .dropdown-content a {
+    float: none;
     color: #f8f8f8;
     padding: 12px 16px;
     text-decoration: none;
     display: block;
     text-align: left;
+    border-radius:15px;
 }
 
 .dropdown-content a:hover {
     background-color: #090490;
+    border-radius:15px;
 }
 
 .dropdown:hover .dropdown-content {
     display: block;
+    border-radius:15px;
 }
 
 /* Search Bar Styling */
@@ -81,18 +98,18 @@
 }
 
 #search-bar input[type="text"] {
-    flex: 1;
-    padding: 5px;
+    flex: 0;
+    padding: 5px 5px;
     border: 1px solid #ccc;
     border-radius: 3px;
     font-size: 12px;
+    margin: 0 10px;
     background-color: #343a40;
     color: white;
-    box-sizing: border-box; /* Include padding in width */
 }
 
 #search-bar .download-xlsx {
-    padding: 5px 10px; /* Adjust button padding */
+    padding: 5px 5px;
     background-color: #007bff;
     color: #fff;
     text-decoration: none;
@@ -118,32 +135,11 @@
 }
 
 .alert .btn-close {
-    padding: 5px 10px;
+    padding: 8px;
     background-color: red;
     color: wheat;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    float: right; /* Align button to the right */
+    border-radius: 15px;
 }
-
-@media (max-width: 768px) {
-    .navbar {
-        font-size: 14px;
-    }
-    /* Adjust other styles for smaller screens */
-}
-
-.alert .btn-close {
-    padding: 5px 10px;
-    background-color: red;
-    color: wheat;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    float: right; /* Align button to the right within the alert */
-}
-
 
 .alert .btn-close:hover {
     background-color: darkred;
