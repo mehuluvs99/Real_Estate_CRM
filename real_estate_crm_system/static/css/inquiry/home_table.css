@@ -8,8 +8,8 @@ body, html {
 
 .tabulator-table .tabulator-header {
   position: sticky;
-  margin-top: px; /* Adjust this value based on the height of your navbar */
-  z-index: 1000; /* Ensure the header is above the navbar */ 
+  /* margin-top: px; Adjust this value based on the height of your navbar */
+  z-index: 1000;
 }
 
 
@@ -35,7 +35,7 @@ body, html {
 }
 
 .tabulator-row:nth-child(2n) .tabulator-cell {
-  background-color: rgba(0, 0, 0, 0.125);
+  background-color: cadetblue;
 }
 
 .tabulator-row .tabulator-cell {
