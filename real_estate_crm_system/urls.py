@@ -17,6 +17,6 @@ urlpatterns = [
     path('manage/', views.ManageModelsView.as_view(), name='manage_models'),
     path('delete/<str:object_type>/<int:object_id>/', views.delete_object, name='delete_object'),
     path('download/', views.download_xlsx, name='download_xlsx'),
-    path('update_follow_up/<int:follow_up_id>/', views.update_follow_up, name='update_follow_up'),
+    path('update_follow_up/<str:unique_key>/', views.update_follow_up, name='update_follow_up'),
 
 ]

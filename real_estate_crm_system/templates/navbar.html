@@ -8,14 +8,37 @@
     {% if user.is_authenticated %}
     <a class="nav-link" href="{% url 'add_inquiry' %}">Add Inquiry</a>
     <a class="nav-link" href="{% url 'upload_inquiry' %}">Upload Inquiry</a>
-    <div class="dropdown">
+    <!-- <div class="dropdown">
         <a class="nav-link">FMS</a>
         <div class="dropdown-content">
             <a href="{% url 'account' %}">Page1</a>
             <a href="{% url 'account' %}">Page2</a>
             <a href="{% url 'account' %}">Page3</a>
         </div>
-    </div>
+    </div> -->
+    <li class="nav-item dropdown">
+        <a
+          data-mdb-dropdown-init
+          class="nav-link dropdown-toggle"
+          href="#"
+          id="navbarDropdownMenuLink"
+          role="button"
+          aria-expanded="false"
+        >
+          Dropdown link
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <li>
+            <a class="dropdown-item" href="#">Action</a>
+          </li>
+          <li>
+            <a class="dropdown-item" href="#">Another action</a>
+          </li>
+          <li>
+            <a class="dropdown-item" href="#">Something else here</a>
+          </li>
+        </ul>
+      </li>
     <a class="nav-link" href="{% url 'account' %}">Account</a>
     <a class="nav-link" href="{% url 'payment' %}">Recieve Payment</a>
     <a class="nav-link" href="{% url 'upload_account' %}">Upload Payment</a>

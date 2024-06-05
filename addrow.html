@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Dynamic Rows</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .mb-2 {
+            border-radius: 10px;
+            border: 0.1px;
+            margin: 0px;
+            padding: 1px;
+            background-color: #d8dbe6;
+        }
+
+        body {
+            padding: 0px;
+            background-color: #011A5A;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        }
+
+        #udidInput {
+            display: none;
+        }
+
+        .container {
+            max-width: 100%;
+            margin: auto;
+            padding: 1px;
+            background-color: #273d8a;
+            border-radius: 5px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: white;
+            font-size: 30px;
+        }
+
+        .form-label {
+            font-weight: bold;
+        }
+
+        .btn-primary {
+            width: 100%;
+        }
+
+        .form-control {
+            margin: 5px;
+            font-size: 12px;
+        }
+
+        .sticky-row {
+            position: -webkit-sticky;
+            position: sticky;
+            top: 0;
+            background-color: #d8dbe6;
+            z-index: 1000;
+        }
+
+        .add-row-btn,
+        .progressBarContainer,
+        .btn-primary {
+            margin: 15px;
+        }
+
+        #progress {
+            margin: 15px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container mt-4">
+        <h1>Quotation Form</h1>
+        <form id="data-form">
+            <div class="mb-2 row sticky-row">
+                <div class="col-sm-2">
+                    <select required class="form-control form-control-sm" id="companyselectInput">
+                        <option selected>Select Company</option>
+                        <option value="CAN ENDS GROUP">CAN ENDS GROUP</option>
+                        <option value="LAMY INTERNATIONAL">LAMY INTERNATIONAL</option>
+                    </select>
+                </div>
+                <div class="col-sm-2">
+                    <input type="text" class="form-control form-control-sm" placeholder="Timestamp" id="timestampInput"
+                        disabled>
+                </div>
+                <div class="col-sm-2">
+                    <input type="text" class="form-control form-control-sm" placeholder="Quotation No"
+                        id="quotationInput" disabled>
+                </div>
+                <div class="col-sm-2">
+                    <input type="text" required class="form-control form-control-sm" placeholder="Enquiry No"
+                        id="enquirynoInput">
+                </div>
+                <input type="text" class="form-control form-control-sm" placeholder="UDID" id="udidInput" disabled>
+                <div class="col-sm-2">
+                    <input type="text" class="form-control form-control-sm" placeholder="Doer Mail ID" id="emailidInput"
+                        disabled>
+                </div>
+                <div class="col-sm-2">
+                    <input type="text" class="form-control form-control-sm" placeholder="Prepared By"
+                        id="preparedbyInput" disabled>
+                </div>
+            </div>
+            <div class="mb-2 row sticky-row">
+                <div class="col-sm-5">
+                    <input type="text" required class="form-control form-control-sm" placeholder="Company Name"
+                        id="companynameInput">
+                </div>
+                <div class="col-sm-7">
+                    <textarea required class="form-control form-control-sm" placeholder="Company Address"
+                        id="companyaddressInput" rows="1"></textarea>
+                </div>
+                <div class="col-sm-3">
+                    <input type="text" class="form-control form-control-sm" placeholder="Contact Person"
+                        id="personnamenoInput">
+                </div>
+                <div class="col-sm-3">
+                    <input type="email" class="form-control form-control-sm" placeholder="Email ID"
+                        id="personemailidInput">
+                </div>
+                <div class="col-sm-3">
+                    <input type="number" class="form-control form-control-sm" placeholder="WApp Contact No"
+                        id="wappcontactnoInput">
+                </div>
+                <div class="col-sm-3">
+                    <input type="number" class="form-control form-control-sm" placeholder="Contact No"
+                        id="contactnoInput">
+                </div>
+            </div>
+            <div id="row-container">
+                <!-- New rows will be added here -->
+            </div>
+            <div id="items-container"></div>
+            <div class="mb-2 row">
+                <div class="col-sm-1">
+                    <select class="form-control form-control-sm" id="incoterm"></select>
+                </div>
+                <div class="col-sm-2">
+                    <input type="text" required class="form-control form-control-sm" placeholder="Country of Origin"
+                        id="countryoforiginInput">
+                </div>
+                <div class="col-sm-2">
+                    <select class="form-control form-control-sm" id="paymentterms"></select>
+                </div>
+                <div class="col-sm-1">
+                    <label for="validityInput" class="col-sm-1 col-form-label">Validity:</label>
+                </div>
+                <div class="col-sm-2">
+                    <input type="date" required class="form-control form-control-sm" id="validityInput">
+                </div>
+                <div class="col-sm-1">
+                    <input type="number" required class="form-control form-control-sm" placeholder="Lead Time"
+                        id="leadtimeInput">
+                </div>
+                <div class="col-sm-2">
+                    <input type="text" required class="form-control form-control-sm" placeholder="Destination"
+                        id="destinationInput">
+                </div>
+            </div>
+            <div class="mb-2 row">
+                <div class="col-sm-12">
+                    <textarea required class="form-control form-control-sm"
+                        placeholder="Other Details For The Customers" id="remarks"></textarea>
+                </div>
+            </div>
+            <div class="mb-2 row">
+                <div class="col-sm-2">
+                    <button class="btn btn-primary" id="add-row-btn">Add Row</button>
+                </div>
+                <div class="col-sm-2">
+                    <button type="button" class="btn btn-primary" id='submit-button'>Submit</button>
+                </div>
+                <div class="col-sm-8">
+                    <div class="progress" style="height: 40px; margin: 15px;">
+                        <div class="progress-bar" id='progressBarContainer' style="width: 0%;" aria-valuenow="0"
+                            aria-valuemin="0" aria-valuemax="0">0%</div>
+                    </div><br>
+                </div>
+            </div>
+    </div>
+    </form>
+    </div>
+    </div>
+
+    <script>
+        let index = 0;
+
+        document.getElementById('add-row-btn').addEventListener('click', function () {
+            // Increment the index for each new row
+            index++;
+
+            // Create a new div element for the row
+            const newRow = document.createElement('div');
+            newRow.classList.add('mb-2', 'row');
+
+            // Set the innerHTML of the new row with the dynamic IDs
+            newRow.innerHTML = `
+		
+		<style>
+			#item${index}udid{
+				display:none;
+		}		
+		</style>
+                <input type="text" class="form-control form-control-sm" placeholder="ItemUIDD" id="item${index}udid">
+                <div class="col-sm-1">
+                    <select class="form-control form-control-sm category-select" id="itemcategory${index}Input"></select>
+                </div>
+                <div class="col-sm-1">
+                    <select class="form-control form-control-sm product-select" id="product${index}Input"></select>
+                </div>
+                <div class="col-sm-1">
+                    <select class="form-control form-control-sm" id="size${index}Input"></select>
+                </div>
+                <div class="col-sm-1">
+                    <select class="form-control form-control-sm" id="thickness${index}Input"></select>
+                </div>
+                <div class="col-sm-2">
+                    <select class="form-control form-control-sm" id="itemname${index}Input"></select>
+                </div>
+                <div class="col-sm-1">
+                    <select class="form-control form-control-sm" id="aperture_usage${index}Input"></select>
+                </div>
+                <div class="col-sm-1">
+                    <select class="form-control form-control-sm" id="tabs${index}Input"></select>
+                </div>
+                <div class="col-sm-2">
+                    <select class="form-control form-control-sm" id="outside${index}Input"></select>
+                </div>
+                <div class="col-sm-2">
+                    <select class="form-control form-control-sm" id="inside${index}Input"></select>
+                </div>
+                <div class="col-sm-1">
+                    <select class="form-control form-control-sm" id="unit${index}Input">
+                        <option selected>Unit</option>
+                        <option value="MT">MT</option>
+                        <option value="KGS">KGS</option>
+                        <option value="PC">PC</option>
+                        <option value="1000-PCS">1000 PC</option>
+                        <option value="Sheet">Sheet</option>
+                    </select>
+                </div>
+                <div class="col-sm-2">
+                    <input type="number" class="form-control form-control-sm" placeholder="Item Qty" id="itemqty${index}Input">
+                </div>
+                <div class="col-sm-1">
+                    <select class="form-control form-control-sm" id="currency${index}Input">
+                        <option selected>Currency</option>
+                        <option value="USD">USD</option>
+                        <option value="AED">AED</option>
+                        <option value="EURO">EURO</option>
+                    </select>
+                </div>
+                <div class="col-sm-1">
+                    <input type="number" class="form-control form-control-sm" placeholder="R.P Unit" id="rateperpcs${index}Input">
+                </div>
+                <div class="col-sm-7">
+                    <input class="form-control form-control-sm" placeholder="Notes" id="note${index}Input">
+                </div>
+            `;
+
+            // Append the new row to the container
+            document.getElementById('row-container').appendChild(newRow);
+        });
+    </script>
+</body>
+
+</html>

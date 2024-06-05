@@ -71,8 +71,8 @@
 
 /* Search Bar Styling */
 #search-bar {
-    display: flex;
-    align-items: center;
+    display: inherit;
+    /* align-items: center; */
     background-color: #343a40;
     color: white;
     border-radius: 15px;

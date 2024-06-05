@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Quotation Form</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            padding: 5px;
+            background-color: #011A5A;
+        }
+
+        .container {
+            max-width: 100%;
+            margin: auto;
+            padding: 5px;
+            background-color: #273d8a;
+            border-radius: 5px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: white;
+        }
+
+        .form-label {
+            font-weight: bold;
+        }
+
+        .btn-primary {
+            width: 100%;
+        }
+
+        .form-control {
+            margin: 5px;
+            font-size: 12px;
+        }
+
+        .progress {
+            margin: 5px;
+        }
+
+        .progress-bar {
+            height: 30px;
+            line-height: 30px;
+            background-color: #007bff;
+            color: white;
+            text-align: center;
+            border-radius: 5px;
+        }
+
+        #udidInput {
+            display: none;
+        }
+
+        .mb-2 {
+            border-radius: 10px;
+            border: 0.1px;
+            margin: 1px;
+            padding: 1px;
+            background-color: #d8dbe6;
+        }
+
+        #enquirynoInput {
+            background-color: yellow;
+        }
+    </style>
+</head>
+
+
+<body>
+    <div class="container mt-4">
+        <h1>Quotation Form</h1>
+        <form id="data-form">
+            <div class="mb-2 row sticky-row">
+                <div class="col-sm-2">
+                    <select required class="form-control form-control-sm" id="companyselectInput">
+                        <option selected>Select Company</option>
+                        <option value="CAN ENDS GROUP">CAN ENDS GROUP</option>
+                        <option value="LAMY INTERNATIONAL">LAMY INTERNATIONAL</option>
+                    </select>
+                </div>
+                <div class="col-sm-2">
+                    <input type="text" class="form-control form-control-sm" placeholder="Timestamp" id="timestampInput"
+                        disabled>
+                </div>
+                <div class="col-sm-2">
+                    <input type="text" class="form-control form-control-sm" placeholder="Quotation No"
+                        id="quotationInput" disabled>
+                </div>
+                <div class="col-sm-2">
+                    <input type="text" required class="form-control form-control-sm" placeholder="Enquiry No"
+                        id="enquirynoInput">
+                </div>
+                <input type="text" class="form-control form-control-sm" placeholder="UDID" id="udidInput" disabled>
+                <div class="col-sm-2">
+                    <input type="text" class="form-control form-control-sm" placeholder="Doer Mail ID" id="emailidInput"
+                        disabled>
+                </div>
+                <div class="col-sm-2">
+                    <input type="text" class="form-control form-control-sm" placeholder="Prepared By"
+                        id="preparedbyInput" disabled>
+                </div>
+            </div>
+            <div class="mb-2 row sticky-row">
+                <div class="col-sm-5">
+                    <input type="text" required class="form-control form-control-sm" placeholder="Company Name"
+                        id="companynameInput">
+                </div>
+                <div class="col-sm-7">
+                    <textarea required class="form-control form-control-sm" placeholder="Company Address"
+                        id="companyaddressInput" rows="1"></textarea>
+                </div>
+                <div class="col-sm-3">
+                    <input type="text" class="form-control form-control-sm" placeholder="Contact Person"
+                        id="personnamenoInput">
+                </div>
+                <div class="col-sm-3">
+                    <input type="email" class="form-control form-control-sm" placeholder="Email ID"
+                        id="personemailidInput">
+                </div>
+                <div class="col-sm-3">
+                    <input type="number" class="form-control form-control-sm" placeholder="WApp Contact No"
+                        id="wappcontactnoInput">
+                </div>
+                <div class="col-sm-3">
+                    <input type="number" class="form-control form-control-sm" placeholder="Contact No"
+                        id="contactnoInput">
+                </div>
+            </div>
+            <div id="row-container">
+                <!-- New rows will be added here -->
+            </div>
+            <div id="items-container"></div>
+            <div class="mb-2 row">
+                <div class="col-sm-1">
+                    <select class="form-control form-control-sm" id="incoterm"></select>
+                </div>
+                <div class="col-sm-2">
+                    <input type="text" required class="form-control form-control-sm" placeholder="Country of Origin"
+                        id="countryoforiginInput">
+                </div>
+                <div class="col-sm-2">
+                    <select class="form-control form-control-sm" id="paymentterms"></select>
+                </div>
+                <div class="col-sm-1">
+                    <label for="validityInput" class="col-sm-1 col-form-label">Validity:</label>
+                </div>
+                <div class="col-sm-2">
+                    <input type="date" required class="form-control form-control-sm" id="validityInput">
+                </div>
+                <div class="col-sm-1">
+                    <input type="number" required class="form-control form-control-sm" placeholder="Lead Time"
+                        id="leadtimeInput">
+                </div>
+                <div class="col-sm-2">
+                    <input type="text" required class="form-control form-control-sm" placeholder="Destination"
+                        id="destinationInput">
+                </div>
+            </div>
+            <div class="mb-2 row">
+                <div class="col-sm-12">
+                    <textarea required class="form-control form-control-sm"
+                        placeholder="Other Details For The Customers" id="remarks"></textarea>
+                </div>
+            </div>
+            <div class="mb-2 row">
+                <div class="col-sm-2">
+                    <button type="button" class="btn btn-primary" id="add-row-btn">Add Items</button>
+                </div>
+                <div class="col-sm-2">
+                    <button type="button" class="btn btn-primary" id='submit-button'>Submit</button>
+                </div>
+                <div class="col-sm-8">
+                    <div class="progress" style="height: 40px; margin: 15px;">
+                        <div class="progress-bar" id='progressBarContainer' style="width: 0%;" aria-valuenow="0"
+                            aria-valuemin="0" aria-valuemax="0">0%</div>
+                    </div><br>
+                </div>
+            </div>
+    </div>
+    </form>
+    </div>
+    </div>
+
+    <script>
+        let index = 0;
+
+        document.getElementById('add-row-btn').addEventListener('click', function () {
+            // Increment the index for each new row
+            index++;
+
+            // Create a new div element for the row
+            const newRow = document.createElement('div');
+            newRow.classList.add('mb-2', 'row');
+
+            // Set the innerHTML of the new row with the dynamic IDs
+            newRow.innerHTML = `
+		
+		<style>
+			#item${index}udid{
+				display:none;
+		}		
+		</style>
+                <input type="text" class="form-control form-control-sm" placeholder="ItemUIDD" id="item${index}udid">
+                <div class="col-sm-1">
+                    <select class="form-control form-control-sm category-select" id="itemcategory${index}Input"></select>
+                </div>
+                <div class="col-sm-1">
+                    <select class="form-control form-control-sm product-select" id="product${index}Input"></select>
+                </div>
+                <div class="col-sm-1">
+                    <select class="form-control form-control-sm" id="size${index}Input"></select>
+                </div>
+                <div class="col-sm-1">
+                    <select class="form-control form-control-sm" id="thickness${index}Input"></select>
+                </div>
+                <div class="col-sm-2">
+                    <select class="form-control form-control-sm" id="itemname${index}Input"></select>
+                </div>
+                <div class="col-sm-1">
+                    <select class="form-control form-control-sm" id="aperture_usage${index}Input"></select>
+                </div>
+                <div class="col-sm-1">
+                    <select class="form-control form-control-sm" id="tabs${index}Input"></select>
+                </div>
+                <div class="col-sm-2">
+                    <select class="form-control form-control-sm" id="outside${index}Input"></select>
+                </div>
+                <div class="col-sm-2">
+                    <select class="form-control form-control-sm" id="inside${index}Input"></select>
+                </div>
+                <div class="col-sm-1">
+                    <select class="form-control form-control-sm" id="unit${index}Input">
+                        <option selected>Unit</option>
+                        <option value="MT">MT</option>
+                        <option value="KGS">KGS</option>
+                        <option value="PC">PC</option>
+                        <option value="1000-PCS">1000 PC</option>
+                        <option value="Sheet">Sheet</option>
+                    </select>
+                </div>
+                <div class="col-sm-2">
+                    <input type="number" class="form-control form-control-sm" placeholder="Item Qty" id="itemqty${index}Input">
+                </div>
+                <div class="col-sm-1">
+                    <select class="form-control form-control-sm" id="currency${index}Input">
+                        <option selected>Currency</option>
+                        <option value="USD">USD</option>
+                        <option value="AED">AED</option>
+                        <option value="EURO">EURO</option>
+                    </select>
+                </div>
+                <div class="col-sm-1">
+                    <input type="number" class="form-control form-control-sm" placeholder="R.P Unit" id="rateperpcs${index}Input">
+                </div>
+                <div class="col-sm-7">
+                    <input class="form-control form-control-sm" placeholder="Notes" id="note${index}Input">
+                </div>
+            `;
+
+            // Append the new row to the container
+            document.getElementById('row-container').appendChild(newRow);
+        });
+    </script>
+
+    function setInitialValues() {
+    google.script.run.withSuccessHandler(updatetimestamp).timestamps();
+    google.script.run.withSuccessHandler(updateActiveUser).getActiveUser();
+    google.script.run.withSuccessHandler(updatepreparedby).getpreparedby();
+    google.script.run.withSuccessHandler(updateItemCategories).getItemCategories();
+    google.script.run.withSuccessHandler(updateProduct).getproduct();
+    google.script.run.withSuccessHandler(updateSize).getsize();
+    google.script.run.withSuccessHandler(updateThickness).getthinkness();
+    google.script.run.withSuccessHandler(updateItemname).getitemname();
+    google.script.run.withSuccessHandler(updateAperture).getaperture();
+    google.script.run.withSuccessHandler(updateTabs).gettabs();
+    google.script.run.withSuccessHandler(updateOutsizelacquer).getoutsizelacquer();
+    google.script.run.withSuccessHandler(updateInsizelacquer).getinsizelacquer();
+    google.script.run.withSuccessHandler(updateIncoTerm).getIncoTerm();
+    google.script.run.withSuccessHandler(updatePaymentTerm).getPaymentTerm();
+    }
+
+    function updateDropdowns(selectorPrefix, valuesArray, placeholder) {
+    // console.log(valuesArray);
+
+    if (selectorPrefix !== '#paymentterms' && selectorPrefix !== '#incoterm'){
+    for (var i = 0; i < valuesArray.length; i++) { var select=$(selectorPrefix + (i + 1) + 'Input' );
+        select.empty().append('<option value="">' + placeholder + ' ' + (i + 1) + '</option>');
+        const uniqueValues = [...new Set(valuesArray)];
+        const filteredValues = uniqueValues.filter(value => value !== ""); // Trim leading/trailing whitespace
+        filteredValues.forEach(function (value) {
+        select.append('<option value="' + value + '">' + value + '</option>');
+        });
+        }
+        } else {
+        var select = $(selectorPrefix);
+        select.empty().append('<option value="">' + placeholder + '</option>');
+        const uniqueValues = [...new Set(valuesArray)];
+        const filteredValues = uniqueValues.filter(value => value !== ""); // Trim leading/trailing whitespace
+        filteredValues.forEach(function (value) {
+        select.append('<option value="' + value + '">' + value + '</option>');
+        });
+        }
+        }
+
+
+        function updateIncoTerm(incoTerms) {
+        updateDropdowns('#incoterm', incoTerms, 'IncoTerm');
+        }
+
+        function updatePaymentTerm(paymentTerms) {
+        updateDropdowns('#paymentterms', paymentTerms, 'Payment Term');
+        }
+
+        function updateItemCategories(itemCategories) {
+        updateDropdowns('#itemcategory', itemCategories, 'Item Category');
+        }
+
+        function updateProduct(products) {
+        updateDropdowns('#product', products, 'Product');
+        }
+
+        function updateSize(sizes) {
+        updateDropdowns('#size', sizes, 'Size');
+        }
+
+        function updateThickness(thicknesses) {
+        updateDropdowns('#thickness', thicknesses, 'Thickness');
+        }
+
+        function updateItemname(itemNames) {
+        updateDropdowns('#itemname', itemNames, 'Item Name');
+        }
+
+        function updateAperture(apertures) {
+        updateDropdowns('#aperture_usage', apertures, 'Aperture');
+        }
+
+        function updateTabs(tabs) {
+        updateDropdowns('#tabs', tabs, 'Tabs');
+        }
+
+        function updateOutsizelacquer(outsideSizeLacquers) {
+        updateDropdowns('#outside', outsideSizeLacquers, 'Outside');
+        }
+
+        function updateInsizelacquer(insideSizeLacquers) {
+        updateDropdowns('#inside', insideSizeLacquers, 'Inside');
+        }
+
+
+        function updatetimestamp(timestamps){
+        $('#timestampInput').val(timestamps);
+        }
+
+        function updatequotationNo(qoutation) {
+        $('#quotationInput').val(qoutation);
+        }
+
+        function updateActiveUser(activeUser) {
+        $('#emailidInput').val(activeUser);
+        }
+
+        function updatepreparedby(preparedby) {
+        $('#preparedbyInput').val(preparedby);
+        }
+
+        $(document).ready(function() {
+        setInitialValues();
+        });
+
+        $(document).ready(function() {
+        $('#companyselectInput').on('change', function() {
+        var selectedCompany = $(this).val();
+        google.script.run.withSuccessHandler(updatequotationNo).getUpdatedQuotation(selectedCompany);
+        });
+        });
+
+        $(document).ready(function() {
+        // Define the number of inputs and associated UDID handlers
+        var inputCount = 10; // Update this value with the number of inputs
+        var inputs = [];
+
+        // Generate the array of input IDs and associated UDID handlers
+        for (var i = 1; i <= inputCount; i++) { inputs.push({ inputId: '#itemcategory' + i + 'Input' , udidId: '#item' +
+            i + 'udid' }); } // Iterate over each input and set up the change event handler
+            inputs.forEach(function(pair) { $(pair.inputId).on('change', function() { var inputValue=$(this).val();
+            google.script.run.withSuccessHandler(updateUdid(pair.udidId)).generateUDID(inputValue); }); }); }); function
+            updateUdid(udidId) { return function(udid) { $(udidId).val(udid); }; }
+            $("#enquirynoInput").change(function() { var usermailid=$("#emailidInput").val(); //
+            console.log(usermailid); google.script.run .withSuccessHandler((jsData)=> {
+            var filteredData = jsData.filter(function(row) {
+            var isAdminEmailPresent = row["Admin"].trim().includes($("#emailidInput").val());
+            var isDoerMailMatching = row["Doer Mail ID"] === usermailid;
+            var isEnquiryNoMatching = row["Enquiry No"] === $("#enquirynoInput").val();
+
+            return (isDoerMailMatching || isAdminEmailPresent) && isEnquiryNoMatching;
+            });
+
+            if (filteredData.length > 0) {
+            var row = filteredData[0];
+            $("#udidInput").val(row["UDID"]);
+            $("#companynameInput").val(row["Company Name"]);
+            $("#companyaddressInput").val(row["Address"]);
+            $('#personnamenoInput').val(row["Person Name"]);
+            $("#contactnoInput").val(row["Person Contact No"]);
+            $('#wappcontactnoInput').val(row["Person WAppContact No"]);
+            $("#personemailidInput").val(row["Person E-Mail"]);
+            }
+            })
+            .getData(); // This line should be inside the google.script.run block
+            });
+
+
+
+            $(document).ready(function() {
+            var inputElements = [
+            $("#enquirynoInput"),
+            $("#companynameInput"),
+            $('#companyaddressInput'),
+            $('#personnamenoInput'),
+            $("#personemailidInput"),
+            $("#noteInput"),
+            $("#countryoforiginInput"),
+            $("#destinationInput"),
+            $("#note1Input"),
+            $("#note2Input"),
+            $("#note3Input"),
+            $("#note4Input"),
+            ];
+
+            inputElements.forEach(function(inputElement) {
+            inputElement.on("input", function() {
+            var inputValue = $(this).val(); // Get the current input value
+            var trimmedUppercaseValue = inputValue.toUpperCase(); // Trim and convert to uppercase
+            $(this).val(trimmedUppercaseValue); // Update the input value
+            });
+            });
+            });
+
+
+            $(document).ready(function() {
+            var bar = $(".progress-bar");
+            var duration = 50000; // 6 seconds
+            var increment = 1; // Increment value per millisecond
+
+            function makeProgress(currentWidth, startTime) {
+            var currentTime = new Date().getTime();
+            var elapsedTime = currentTime - startTime;
+            var newWidth = (elapsedTime / duration) * 100;
+
+            if (newWidth < 100) { bar.css("width", newWidth + "%" ); bar.text(Math.floor(newWidth) + "%" );
+                requestAnimationFrame(function () { makeProgress(currentWidth, startTime); }); } else {
+                bar.css("width", "100%" ); bar.text("100%"); } } function resetProgressBar() { bar.css("width", "0%" );
+                bar.text("0%"); } function startProgressBar() { resetProgressBar(); var startTime=new Date().getTime();
+                makeProgress(0, startTime); } $("#submit-button").on("click", function() { var
+                requiredFields=['#companyselectInput', '#enquirynoInput' , '#companynameInput' , '#companyaddressInput'
+                , '#personnamenoInput' , '#contactnoInput' , '#incotermInput' , '#countryoforiginInput'
+                , '#paymenttermsInput' , '#validityInput' , '#leadtimeInput' , '#destinationInput' ]; for (var i=0; i <
+                requiredFields.length; i++) { if ($(requiredFields[i]).val()==="" ) { alert("Please fill out all
+                required fields."); return; } } for (var j=1; j <=4; j++) { var itemCondition=($("#product" + j
+                + "Input" ).val() !=="" || $("#size" + j + "Input" ).val() !=="" || $("#thickness" + j + "Input" ).val()
+                !=="" || $("#itemname" + j + "Input" ).val() !=="" || $("#aperture_usage" + j + "Input" ).val() !=="" ||
+                $("#tabs" + j + "Input" ).val() !=="" || $("#outside" + j + "Input" ).val() !=="" || $("#inside" + j
+                + "Input" ).val() !=="" ); if (itemCondition) { var itemcategoryInput=$('#itemcategory' + j + 'Input'
+                ).val(); var unitInput=$('#unit' + j + 'Input' ).val(); var itemqtyInput=$('#itemqty' + j + 'Input'
+                ).val(); var currencyInput=$('#currency' + j + 'Input' ).val(); var rateperpcsInput=$('#rateperpcs' + j
+                + 'Input' ).val(); if (itemcategoryInput==="" || unitInput==="" || itemqtyInput==="" ||
+                currencyInput==="" || rateperpcsInput==="" ) { alert("Please fill out all required fields for
+                item " + j + " ."); return; } } } // Proceed with the rest of your code for (var j=1; j <=4; j++) { var
+                itemData=[]; var itemCondition=false; for (var k=0; k < 5; k++) { var field=$('#item' + j
+                + 'udid, #itemcategory' + j + 'Input, #product' + j + 'Input, #size' + j + 'Input, #thickness' + j
+                + 'Input, #itemname' + j + 'Input, #aperture_usage' + j + 'Input, #tabs' + j + 'Input, #outside' + j
+                + 'Input, #inside' + j + 'Input, #unit' + j + 'Input, #itemqty' + j + 'Input, #currency' + j
+                + 'Input, #rateperpcs' + j + 'Input, #note' + j + 'Input' )[k]; if ($(field).val() !=="" ) {
+                itemCondition=true; } itemData.push($(field).val()); } if (itemCondition) { formData.push(itemData); } }
+                var additionalData=['#companyselectInput', '#timestampInput' , '#quotationInput' , '#enquirynoInput'
+                , '#udidInput' , '#companynameInput' , '#companyaddressInput' , '#personnamenoInput'
+                , '#personemailidInput' , '#contactnoInput' , '#incotermInput' , '#countryoforiginInput'
+                , '#paymenttermsInput' , '#validityInput' , '#leadtimeInput' , '#destinationInput' , '#emailidInput'
+                , '#preparedbyInput' ]; for (var l=0; l < additionalData.length; l++) {
+                formData.push($(additionalData[l]).val()); } // Proceed with the rest of your code startProgressBar();
+                google.script.run .withSuccessHandler(function() { setTimeout(function() { google.script.run
+                .withSuccessHandler(function() { resetProgressBar(); setInitialValues(); alert('Data submitted
+                successfully. PDF Sent on your mail id. please check'); $("#data-form")[0].reset(); })
+                .send_mail(formData); }, 1000); // 30-second delay setTimeout(function() { google.script.run
+                .withSuccessHandler(function() {}) }, 1000); // 30-second delay }).submitForm(formData); }); });
+                </script>
+
+                <script> src = "https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"</script>
+</body>
+
+</html>

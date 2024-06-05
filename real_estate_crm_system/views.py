@@ -547,17 +547,16 @@ def update_project(request, project_id):
         form = ProjectForm(instance=project)
 
 
-def update_follow_up(request, follow_up_id):
-    follow_up_instance = FollowUpUpdate.objects.get(pk=follow_up_id)
+def update_follow_up(request, unique_key):
+    follow_up_instance = get_object_or_404(Add_Inquiry, id=unique_key)
 
     if request.method == 'POST':
-        form = FollowUpUpdateForm(request.POST, instance=follow_up_instance)
-        if form.is_valid():
-            form.save()
+        followupform = FollowUpUpdateForm(request.POST, instance=follow_up_instance)
+        if followupform.is_valid():
+            followupform.save()
             return JsonResponse({'success': True})
         else:
-            return JsonResponse({'success': False, 'errors': form.errors}, status=400)
-
-    # Get the form for the specified follow_up_id
-    form = FollowUpUpdateForm(instance=follow_up_instance)
-    return render(request, 'update_remarks_modal.html', {'form': form})
+            return JsonResponse({'success': False, 'errors': followupform.errors}, status=400)
+    
+    followupform = FollowUpUpdateForm(instance=follow_up_instance)
+    return render(request, 'update_remarks_modal.html', {'followupform': followupform, 'unique_key': unique_key})

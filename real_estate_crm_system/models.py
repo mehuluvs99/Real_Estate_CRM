@@ -154,6 +154,7 @@ class FollowUpUpdate(models.Model):
     next_follow_up_date = models.CharField(max_length=50, blank=True, null=True)
     converted_date = models.CharField(max_length=50, blank=True, null=True)
     assign_to = models.ForeignKey(Assign_To, on_delete=models.CASCADE,blank=True,null=True)
+    unique_key = models.CharField(max_length=100, blank=True, null=True)
 
     def __str__(self):
         return f"{self.created_date} {self.remarks}"

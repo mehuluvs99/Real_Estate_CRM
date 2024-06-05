@@ -192,4 +192,5 @@ class FollowUpUpdateForm(forms.ModelForm):
             "assign_to": forms.TextInput(attrs={'class': 'form-control form-control-lg'}),
             "selected_unit": forms.TextInput(attrs={'class': 'form-control form-control-lg'}),
             "interested_project": forms.TextInput(attrs={'class': 'form-control form-control-lg'}),
+            "unique_key": forms.TextInput(attrs={'class': 'form-control form-control-lg'}),
         }        

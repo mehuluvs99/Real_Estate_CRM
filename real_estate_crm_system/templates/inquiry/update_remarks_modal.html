@@ -1,23 +1,52 @@
-<!-- This is the content of update_remarks_modal.html -->
-<div id="inputModal" class="modal fade" tabindex="-1" aria-labelledby="inputModalLabel" aria-hidden="true">
+<div id="inputModal" class="modal" tabindex="-1">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">Follow-Up Update</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
             </div>
             <div class="modal-body">
-                <form id="updateForm" method="post">
+                <form id="updateForm" method="post" action="{% url 'update_follow_up' unique_key %}">
                     {% csrf_token %}
-                    {{ form.as_p }} <!-- Render Django form fields -->
+                    {{ followupform.as_p }}
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" id="closeInputButton" class="btn btn-secondary">Close</button>
                 <button type="button" id="saveInputButton" class="btn btn-primary">Save</button>
             </div>
         </div>
     </div>
 </div>
+<script>
+    $(document).ready(function() {
+        $('#saveInputButton').on('click', function () {
+            var formData = $('#updateForm').serialize();
+            var actionUrl = $('#updateForm').attr('action');
+            $.ajax({
+                url: actionUrl,
+                method: 'POST',
+                data: formData,
+                success: function (response) {
+                    if (response.success) {
+                        $('#inputModal').modal('hide');
+                        location.reload();  // Reload the page or update the table row dynamically
+                    } else {
+                        // Handle form errors
+                        var errors = response.errors;
+                        for (var field in errors) {
+                            // Display errors on the form
+                            $('#id_' + field).after('<div class="text-danger">' + errors[field] + '</div>');
+                        }
+                    }
+                },
+                error: function (xhr, errmsg, err) {
+                    console.log(xhr.status + ": " + xhr.responseText);
+                }
+            });
+        });
+
+        $('#closeInputButton').on('click', function () {
+            $('#inputModal').modal('hide');
+        });
+    });
+</script>

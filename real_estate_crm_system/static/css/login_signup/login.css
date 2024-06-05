@@ -2,7 +2,7 @@
 
 body {
     background-color:darkblue;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-family: 'Gill Sans', 'Gill Sans MT', 'Calibri', 'Trebuchet MS', sans-serif;
 }
 
 .login-container {
@@ -23,8 +23,8 @@ body {
 }
 
 .login-input {
-    margin-bottom: 20px;
-    margin-right: 20px;
+    width:100%;
+    margin: 10px 0;
 }
 
 .login-input-field {

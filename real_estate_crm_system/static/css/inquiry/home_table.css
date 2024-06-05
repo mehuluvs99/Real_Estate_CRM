@@ -13,7 +13,6 @@ body, html {
 }
 
 
-
 .tabulator .tabulator-footer .tabulator-paginator {
   color: #3759d7;
   flex: 1;
@@ -32,10 +31,6 @@ body, html {
       background-color: #2544b7;
       color:white;
   }
-}
-
-.tabulator-row:nth-child(2n) .tabulator-cell {
-  background-color:transparent;
 }
 
 .status_update-button {
@@ -70,4 +65,43 @@ body, html {
   margin: 1px auto; /* Adjust this value based on the height of your navbar */
   overflow-y:  5px auto; /* Allow vertical scrolling */
   max-height: calc(100vh - 30px - 100px); /* Subtract the height of the navbar and search bar from the viewport height */
+}
+
+@media (min-width: auto) {
+  .container, .container-sm {
+      max-width: auto;
+  }
+}
+
+#search-bar {
+  display: inherit;
+  /* align-items: center; */
+  background-color: #343a40;
+  color: white;
+  border-radius: 15px;
+  margin-top: 5px;
+  padding: 5px;
+}
+
+#search-bar input[type="text"] {
+  flex: 1;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  font-size: 12px;
+  background-color: #343a40;
+  color: white;
+  box-sizing: border-box; /* Include padding in width */
+}
+
+#search-bar .download-xlsx {
+  padding: 5px 10px; /* Adjust button padding */
+  background-color: #007bff;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 5px;
+}
+
+#search-bar .download-xlsx:hover {
+  background-color: #0056b3;
 }
